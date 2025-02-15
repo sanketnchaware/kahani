@@ -4,10 +4,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TextInput from "../Components/Common/TextInput";
 import UserContext from "../userContext/userContext";
-import hero_logo from "../assets/svg/hero_logo.svg";
-import welcome from "../assets/svg/welcome.svg";
-import notification from "../assets/svg/notification.svg";
-import expressive from "../assets/svg/expressive.svg";
 
 const storyCategories = [
   "Adventure",
@@ -44,7 +40,7 @@ const Introduction = () => {
     <div className="divide-y-2">
       <section className="flex items-center px-44 bg-black text-white min-h-screen">
         <div className="w-full space-y-6">
-          <img className="h-[50vh] m-auto" src={welcome} alt="hero_logo" />
+          {/* <img className="h-[50vh] m-auto" src={welcome} alt="hero_logo" /> */}
 
           <h4 className="text-center w-full">
             Hey {user?.firstname}, Welcome to Kahani.com !
@@ -55,7 +51,7 @@ const Introduction = () => {
 
       <section className="flex items-center px-44  text-black min-h-screen">
         <div className="w-full space-y-4">
-          <img className="h-[45vh] m-auto" src={expressive} alt="hero_logo" />
+          {/* <img className="h-[45vh] m-auto" src={expressive} alt="hero_logo" /> */}
 
           <div>
             <h2 className="text-center w-full">Start writing your story..</h2>
@@ -100,22 +96,22 @@ const Introduction = () => {
                   <div className="   rounded-lg shadow-sameshadow">
                     <div className="h-44  w-full relative">
                       <div className="absolute left-4 top-4 flex gap-1 z-10 bg-white rounded-full body4 shadow-inner px-2 items-center py-1">
-                        <div className="w-6 h-6 rounded-full overflow-hidden">
+                        {/* <div className="w-6 h-6 rounded-full overflow-hidden">
                           <img
                             className="object-cover w-full h-full"
                             src="https://images.pexels.com/photos/3770357/pexels-photo-3770357.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt=""
                           />{" "}
-                        </div>
+                        </div> */}
                         <span>
                           {user?.firstname} {user?.lastname}
                         </span>
                       </div>
-                      <img
+                      {/* <img
                         className="rounded-tl-lg rounded-tr-lg grayscale  w-full h-full object-cover"
                         src="https://images.unsplash.com/photo-1735657061774-a9d62d06c954?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         alt=""
-                      />
+                      /> */}
                     </div>
 
                     <div className="p-4 space-y-2">
@@ -132,7 +128,7 @@ const Introduction = () => {
                 );
               })
             )}
-            <img className=" m-auto" src={hero_logo} alt="hero_logo" />
+            {/* <img className=" m-auto" src={hero_logo} alt="hero_logo" /> */}
           </div>
 
           <Link to="/stories" className="block  w-fit">
@@ -145,7 +141,7 @@ const Introduction = () => {
 
       <section className="flex justify-between px-44  bg-black text-white items-center    min-h-screen">
         <div>
-          <img className=" h-[50vh]" src={notification} alt="notification" />
+          {/* <img className=" h-[50vh]" src={notification} alt="notification" /> */}
         </div>
         <div>
           <div className=" space-y-2">
