@@ -107,7 +107,7 @@ const Home = () => {
                   {stories.map((item) => (
                     <div
                       key={item?.id}
-                      className="w-full block  bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-200"
+                      className="w-full   bg-white  p-2 lg:p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-200"
                     >
                       <div className="flex flex-col md:flex-row gap-6">
                         {/* <div className="">

@@ -41,7 +41,7 @@ const MobileSidebar = () => {
     <div className="lg:hidden flex justify-between px-4 py-2 fixed z-50 w-full top-0 bg-white border items-center">
       {/* Hamburger Menu Button */}
 
-      <p>Kahani</p>
+      <Link to="/">Kahani</Link>
       <button
         onClick={handleSidebarToggle}
         className="bg-white rounded-xl backdrop-blur-sm border-2 lg:hidden  p-2"

@@ -38,7 +38,7 @@ const Introduction = () => {
 
   return (
     <div className="divide-y-2">
-      <section className="flex items-center px-44 bg-black text-white min-h-screen">
+      <section className="flex items-center lg:px-44 bg-black text-white min-h-screen">
         <div className="w-full space-y-6">
           {/* <img className="h-[50vh] m-auto" src={welcome} alt="hero_logo" /> */}
 
@@ -49,7 +49,7 @@ const Introduction = () => {
         </div>
       </section>
 
-      <section className="flex items-center px-44  text-black min-h-screen">
+      <section className="flex items-center lg:px-44  text-black min-h-screen">
         <div className="w-full space-y-4">
           {/* <img className="h-[45vh] m-auto" src={expressive} alt="hero_logo" /> */}
 
@@ -72,24 +72,24 @@ const Introduction = () => {
         </div>
       </section>
 
-      <section className="flex items-center justify-center px-44  bg-black text-white min-h-screen">
-        <div className="space-y-20">
+      <section className="flex py-10 items-center justify-center lg:px-44  bg-black text-white min-h-screen">
+        <div className="space-y-5 lg:space-y-20">
           <h4 className=" text-center w-full">Read by Categories</h4>
 
-          <div className="grid grid-cols-4 w-full items-center h-full">
+          <div className="grid grid-cols-2 w-full items-center h-full">
             {React.Children.toArray(
               storyCategories.map((item) => {
-                return <p className="p-4 body1 text-center">{item}</p>;
+                return <p className="p-4 body3 lg:body1 text-center">{item}</p>;
               })
             )}
           </div>
         </div>
       </section>
 
-      <section className="w-10/12 m-auto   flex items-center  min-h-screen">
+      <section className="w-10/12 m-auto py-10  flex items-center  min-h-screen">
         <div className="space-y-8">
           <h4 className="">Best Stories For Today</h4>
-          <div className=" grid grid-cols-4 gap-6">
+          <div className=" grid gtid-cols-1 lg:grid-cols-4 gap-6">
             {React.Children.toArray(
               stories?.map(({ title, description, user }) => {
                 return (
@@ -139,7 +139,7 @@ const Introduction = () => {
         </div>
       </section>
 
-      <section className="flex justify-between px-44  bg-black text-white items-center    min-h-screen">
+      <section className="flex justify-between px-10 lg:px-44  bg-black text-white items-center    min-h-screen">
         <div>
           {/* <img className=" h-[50vh]" src={notification} alt="notification" /> */}
         </div>
