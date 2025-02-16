@@ -76,7 +76,7 @@ const Introduction = () => {
         <div className="space-y-5 lg:space-y-20">
           <h4 className=" text-center w-full">Read by Categories</h4>
 
-          <div className="grid grid-cols-2 w-full items-center h-full">
+          <div className="grid lg:grid-cols-4 grid-cols-2 w-full items-center h-full">
             {React.Children.toArray(
               storyCategories.map((item) => {
                 return <p className="p-4 body3 lg:body1 text-center">{item}</p>;
