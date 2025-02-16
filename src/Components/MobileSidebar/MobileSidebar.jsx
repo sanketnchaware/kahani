@@ -78,7 +78,7 @@ const MobileSidebar = () => {
             className="text-xl font-bold mb-8 px-4"
             onClick={() => setIsOpen(false)}
           >
-            Kahani.com
+            Kahani
           </Link>
 
           {/* Navigation Links */}
