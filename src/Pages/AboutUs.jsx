@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ScrollText, Users, BookOpen, Share2 } from "lucide-react";
 import CommonButton from "../Components/Common/CommonButton";
 import { Link } from "react-router-dom";
+import UserContext from "../userContext/userContext";
 
 const AboutUs = () => {
+  const {
+    auth: { user, isAuthenticated },
+  } = useContext(UserContext);
+
   return (
     <div className="min-h-screen mt-16 bg-white">
       {/* Hero Section */}
@@ -112,11 +117,13 @@ const AboutUs = () => {
           <p className="text-lg mb-8">
             Join our community and let your voice be heard.
           </p>
-          <Link to="/signup">
-            <CommonButton type="submit" styles="w-fit invert" size="sm">
-              Sign up Now
-            </CommonButton>
-          </Link>
+          {!isAuthenticated ? (
+            <Link to="/signup">
+              <CommonButton styles="w-fit invert" size="sm">
+                Sign up Now
+              </CommonButton>
+            </Link>
+          ) : null}
         </div>
       </div>
     </div>

@@ -38,8 +38,8 @@ const Introduction = () => {
 
   return (
     <div className="divide-y-2">
-      <section className="flex items-center lg:px-44 bg-black text-white min-h-screen">
-        <div className="w-full space-y-6">
+      <section className="default_section bg-black text-white ">
+        <div className="w-11/12 m-auto space-y-6">
           {/* <img className="h-[50vh] m-auto" src={welcome} alt="hero_logo" /> */}
 
           <h4 className="text-center w-full">
@@ -49,8 +49,8 @@ const Introduction = () => {
         </div>
       </section>
 
-      <section className="flex items-center lg:px-44  text-black min-h-screen">
-        <div className="w-full space-y-4">
+      <section className="default_section   text-black ">
+        <div className=" space-y-4 w-11/12 m-auto">
           {/* <img className="h-[45vh] m-auto" src={expressive} alt="hero_logo" /> */}
 
           <div>
@@ -72,8 +72,8 @@ const Introduction = () => {
         </div>
       </section>
 
-      <section className="flex py-10 items-center justify-center lg:px-44  bg-black text-white min-h-screen">
-        <div className="space-y-5 lg:space-y-20">
+      <section className="default_section  bg-black text-white">
+        <div className="space-y-5 w-11/12 m-auto lg:space-y-20">
           <h4 className=" text-center w-full">Read by Categories</h4>
 
           <div className="grid lg:grid-cols-4 grid-cols-2 w-full items-center h-full">
@@ -88,8 +88,8 @@ const Introduction = () => {
         </div>
       </section>
 
-      <section className="w-10/12 m-auto py-10  flex items-center  min-h-screen">
-        <div className="space-y-8">
+      <section className="default_section py-24">
+        <div className="space-y-8 w-11/12 m-auto">
           <h4 className="">Best Stories For Today</h4>
           <div className=" grid gtid-cols-1 lg:grid-cols-4 gap-6">
             {React.Children.toArray(
@@ -141,11 +141,11 @@ const Introduction = () => {
         </div>
       </section>
 
-      <section className="flex justify-between px-10 lg:px-44  bg-black text-white items-center    min-h-screen">
+      <section className="  bg-black text-white default_section">
         <div>
           {/* <img className=" h-[50vh]" src={notification} alt="notification" /> */}
         </div>
-        <div>
+        <div className="w-11/12 m-auto lg:w-auto">
           <div className=" space-y-2">
             <p className="title2">Subscribe</p>
 

@@ -177,3 +177,8 @@ h4 {
     transform: rotate(360deg);
   }
 }
+
+
+.default_section {
+  @apply flex items-center justify-center  min-h-screen
+}

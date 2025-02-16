@@ -132,9 +132,9 @@ const Profile = () => {
       <>
         <div
           ref={main}
-          className="HomemainContainer mt-12 col-span-12 min-h-screen grid grid-cols-12"
+          className="HomemainContainer mt-12 col-span-12 min-h-screen grid grid-cols-12   "
         >
-          <div className="p-6 sticky top-12 h-screen lg:block hidden leftcontainer shadow-sameshadow space-y-8 col-span-3">
+          <section className="p-6 lg:sticky top-12 lg:min-h-screen  leftcontainer shadow-sameshadow space-y-8 lg:col-span-3 col-span-12 lg:order-1 order-3">
             <p className="title4 mt-4">Recent stories:</p>
             {React.Children.toArray(
               stories?.length > 0 ? (
@@ -161,8 +161,9 @@ const Profile = () => {
                 </div>
               )
             )}
-          </div>
-          <div className="middleContainer w-full space-y-6 p-6 lg:col-span-6 col-span-12 h-full overflow-y-auto">
+          </section>
+
+          <section className="middleContainer w-full space-y-6 p-6 lg:col-span-6 col-span-12 h-full order-2 lg:order-2 overflow-y-auto ">
             <div className="w-full space-y-6 pt-6">
               <div className="flex items-center justify-center gap-4">
                 <CommonButton
@@ -235,8 +236,9 @@ const Profile = () => {
                 </div>
               )
             )}
-          </div>
-          <div className="shadow-sameshadow  lg:block hidden rightcontainer p-6 space-y-6 col-span-3 sticky   top-12 h-screen">
+          </section>
+
+          <section className="shadow-sameshadow   rightcontainer p-6 space-y-6 lg:col-span-3 lg:order-3 order-1 lg:sticky col-span-12  top-12 lg:min-h-screen">
             <p className="title4 text-center w-full pt-6 ">My profile</p>
             <div className="  h-full w-full flex  flex-col items-center ">
               <div className="mt-4 w-28 h-28 rounded-full   overflow-hidden">
@@ -252,7 +254,7 @@ const Profile = () => {
               <p className="body4b">{user?.email}</p>
               <p className="body4b">{user?.phone}</p>
             </div>
-          </div>
+          </section>
         </div>
 
         <CreateStory
