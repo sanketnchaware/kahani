@@ -4,13 +4,15 @@ import { Link, useLocation } from "react-router-dom";
 import UserContext from "../Context/userContext";
 import axiosInstance from "../utils/axiosInstance";
 import { showToastMessage } from "../utils/helpers";
+import LoaderContext from "../Context/loaderContext";
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const {
     auth: { isAuthenticated, user },
   } = useContext(UserContext);
-  console.log("user:", user);
+
+  const { setLoading } = useContext(LoaderContext);
 
   const [profileOptions, setProfileOptions] = useState(false);
 
@@ -23,10 +25,10 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
+    setLoading(true);
     axiosInstance
       .post("/auth/logout")
       .then((response) => {
-        console.log(response);
         showToastMessage(response?.data?.message);
         localStorage.removeItem("authToken");
         localStorage.removeItem("user");
@@ -34,6 +36,9 @@ const Navbar = () => {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
