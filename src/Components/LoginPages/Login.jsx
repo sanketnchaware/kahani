@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import TextInput from "../Common/TextInput";
 import axiosInstance from "../../utils/axiosInstance";
 import { showToastMessage } from "../../utils/helpers";
-import UserContext from "../../userContext/userContext";
+import UserContext from "../../Context/userContext";
 
 const Login = () => {
   const { setAuth } = useContext(UserContext);

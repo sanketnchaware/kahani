@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import UserContext from "../../userContext/userContext";
+import UserContext from "../../Context/userContext";
 import axiosInstance from "../../utils/axiosInstance";
 import { showToastMessage } from "../../utils/helpers";
 

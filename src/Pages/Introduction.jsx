@@ -3,7 +3,7 @@ import CommonButton from "../Components/Common/CommonButton";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TextInput from "../Components/Common/TextInput";
-import UserContext from "../userContext/userContext";
+import UserContext from "../Context/userContext";
 
 const storyCategories = [
   "Adventure",

@@ -2,7 +2,8 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="loading-overlay">
+    <div className="flex items-center gap-4 loading-overlay">
+      <p className="text-3xl">Loading</p>
       <div className="spinner"></div>
     </div>
   );

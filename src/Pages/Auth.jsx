@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import UserContext from "../userContext/userContext";
+import UserContext from "../Context/userContext";
 import Login from "../Components/LoginPages/Login";
 import Signup from "../Components/LoginPages/Signup";
 

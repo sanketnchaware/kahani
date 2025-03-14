@@ -1,10 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../utils/axiosInstance";
+import { startLoading, stopLoading } from "./loading";
 
-export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-  const response = await axiosInstance.get("/users");
-  return response.data;
-});
+export const fetchUsers = createAsyncThunk(
+  "users/fetchUsers",
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      dispatch(startLoading("users"));
+      const response = await axiosInstance.get("/users");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(err.response?.data || "Error fetching users");
+    } finally {
+      dispatch(stopLoading("users"));
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "users",

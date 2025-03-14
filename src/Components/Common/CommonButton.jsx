@@ -8,6 +8,7 @@ const CommonButton = ({
   onClick, // Click handler
   children, // Button content
   disabled = false, // Disabled state
+  loading = false, // Loading state
   ...props // Additional props
 }) => {
   // Determine styles based on variant
@@ -27,17 +28,23 @@ const CommonButton = ({
 
   return (
     <button
-      type="submit"
+      type={type}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || loading} // Disable when loading
       className={`${styles} common_button flex-shrink-0 ${
         sizeStyles[size] || "py-2"
       } ${variantStyles[variant] || "bg-black"} ${
-        disabled ? "bg-gray-400 cursor-not-allowed" : "transition-all"
-      } rounded-md`}
+        disabled || loading
+          ? "bg-gray-400 cursor-not-allowed"
+          : "transition-all"
+      } rounded-md flex items-center justify-center gap-2`}
       {...props}
     >
-      {children}
+      {loading ? (
+        <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+      ) : (
+        children
+      )}
     </button>
   );
 };

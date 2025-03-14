@@ -8,13 +8,14 @@ import {
   ChevronRight,
   BookOpen,
 } from "lucide-react";
-import UserContext from "../userContext/userContext";
+import UserContext from "../Context/userContext";
 import CreateStory from "../Components/Modals/CreateStory";
 import axiosInstance from "../utils/axiosInstance";
 import { showToastMessage } from "../utils/helpers";
 import CommonButton from "../Components/Common/CommonButton";
 import Loading from "../Components/Loading/Loading";
 import { fetchUsers } from "../features/users";
+import LoaderContext from "../Context/loaderContext";
 
 const Home = () => {
   const { stories } = useSelector((state) => state.stories);
@@ -23,12 +24,14 @@ const Home = () => {
     auth: { user, isAuthenticated },
   } = useContext(UserContext);
 
+  const {  setLoading } = useContext(LoaderContext);
+
   const dispatch = useDispatch();
 
   const main = useRef(null);
 
   const [openCreateStory, setCreateOpenStory] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [storyId, SetStoryId] = useState("");
 
   const fields = {
@@ -48,9 +51,11 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const endpoint = storyId ? `/stories/${storyId}` : "/stories";
-    const method = storyId ? "patch" : "post";
 
+    const endpoint = storyId ? `/stories/${storyId}` : "/stories";
+    const method = storyId ? "put" : "post";
+
+    setLoading(true);
     axiosInstance[method](endpoint, { ...params, user: user?.id })
       .then(() => {
         showToastMessage(
@@ -60,15 +65,17 @@ const Home = () => {
         SetStoryId("");
         setParams(fields);
         toggleStoryModal();
+        setLoading(false);
       })
-      .catch((err) => console.log("err:", err));
+      .catch((err) => {
+        console.log("err:", err);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
-
-  if (loading) return <Loading />;
+  }, [dispatch]);
 
   return (
     <>
@@ -79,7 +86,7 @@ const Home = () => {
             <div className="lg:w-7/12 space-y-6">
               {/* Search Section */}
               <div className="bg-white p-6 rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-6">
+                {/* <div className="flex items-center justify-between mb-6">
                   <h4 className="text-2xl font-bold">For You</h4>
                   {isAuthenticated && (
                     <button
@@ -90,7 +97,7 @@ const Home = () => {
                       Write Story
                     </button>
                   )}
-                </div>
+                </div> */}
                 <div className="relative">
                   <input
                     placeholder="Search stories..."

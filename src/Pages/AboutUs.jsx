@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ScrollText, Users, BookOpen, Share2 } from "lucide-react";
 import CommonButton from "../Components/Common/CommonButton";
 import { Link } from "react-router-dom";
-import UserContext from "../userContext/userContext";
+import UserContext from "../Context/userContext";
 
 const AboutUs = () => {
   const {

@@ -1,25 +1,31 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Calendar, Clock, User } from "lucide-react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import moment from "moment/moment";
+import LoaderContext from "../Context/loaderContext";
 
 const StoryDetails = () => {
   const { id } = useParams();
 
   const [story, setStory] = useState({});
+  const { setLoading } = useContext(LoaderContext);
+
   console.log("story:", story);
 
   const getStoryById = useCallback(() => {
     if (!id) return;
+    setLoading(true);
 
     axiosInstance
       .get(`/stories/${id}`)
       .then((response) => {
         setStory(response.data.story);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("error:", error);
+        setLoading(false);
       });
   }, [id]);
 
