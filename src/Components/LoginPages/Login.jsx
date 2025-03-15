@@ -7,6 +7,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { showToastMessage } from "../../utils/helpers";
 import UserContext from "../../Context/userContext";
 import LoaderContext from "../../Context/loaderContext";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const { setAuth } = useContext(UserContext);
@@ -19,6 +20,7 @@ const Login = () => {
 
   const [params, setParams] = useState(fields);
   const [errors, setErrors] = useState(fields);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e?.target;
@@ -78,15 +80,28 @@ const Login = () => {
             onChange={handleChange}
             error={errors?.email}
           />
-          <TextInput
-            type="password"
-            name="password"
-            placeholder="Enter Password"
-            className="placeholder:text-sm bg-transparent border text-black w-full py-3 border-slate-600"
-            value={params?.password}
-            onChange={handleChange}
-            error={errors?.password}
-          />
+          <div className="relative">
+            <TextInput
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter Password"
+              className="placeholder:text-sm bg-transparent border text-black w-full py-3 border-slate-600"
+              value={params?.password}
+              onChange={handleChange}
+              error={errors?.password}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-0 bottom-0 m-auto"
+            >
+              {showPassword ? (
+                <EyeOff className="w-5 h-5" />
+              ) : (
+                <Eye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
 
           <CommonButton type="submit" size="sm" styles="w-full  text-md">
             Sign In

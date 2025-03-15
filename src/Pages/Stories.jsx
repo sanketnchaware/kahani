@@ -175,7 +175,7 @@ const Home = () => {
                             <p className="text-gray-600 line-clamp-3">
                               {item?.description}
                             </p>
-                            <div className="flex   justify-between items-center pt-2">
+                            <div className="flex lg:gap-0 gap-4  lg:flex-row flex-col justify-between lg:items-center pt-2">
                               <div className="flex items-center gap-3">
                                 <img
                                   className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
@@ -194,7 +194,7 @@ const Home = () => {
                               </div>
                               <Link
                                 to={`/stories/${item?._id}`}
-                                className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition duration-200"
+                                className="flex lg:justify-center justify-end  items-center gap-2 px-0 lg:px-4 py-2 bg-transparent lg:bg-black text-black lg:text-white rounded-lg hover:bg-gray-800 transition duration-200"
                               >
                                 Read More
                                 <ChevronRight className="w-4 h-4" />

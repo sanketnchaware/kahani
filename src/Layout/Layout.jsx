@@ -1,6 +1,5 @@
-import React, { Children, useContext, useEffect } from "react";
-import { Routes, Route, useParams } from "react-router-dom";
-import Home from "../Pages/Stories";
+import React, { useContext, useEffect } from "react";
+
 import { Outlet } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
@@ -14,6 +13,7 @@ import Loading from "../Components/Loading/Loading";
 
 const Layout = () => {
   const dispatch = useDispatch();
+
   const { loading } = useContext(LoaderContext);
 
   const loadingSlices = useSelector((state) => state.loading);
