@@ -23,7 +23,7 @@ const Signup = () => {
 
   const handleChange = (e) => {
     const { name, value } = e?.target;
-    console.log("name, value:", name, value);
+    ("name, value:", name, value);
 
     setParams({ ...params, [name]: value });
   };
@@ -46,7 +46,7 @@ const Signup = () => {
         navigate("/login");
       })
       .catch((error) => {
-        console.log("error:", error);
+        ("error:", error);
       });
   };
 

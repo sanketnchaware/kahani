@@ -26,14 +26,13 @@ const MobileSidebar = () => {
     axiosInstance
       .post("/auth/logout")
       .then((response) => {
-        console.log(response);
         showToastMessage(response?.data?.message);
         localStorage.removeItem("authToken");
         localStorage.removeItem("user");
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        error;
       });
   };
 

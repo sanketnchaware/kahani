@@ -56,7 +56,7 @@ const CreateStory = ({
           category: res?.data?.story?.category?._id,
         });
       })
-      .catch((err) => console.log("err:", err));
+      .catch((err) => ("err:", err));
   };
 
   useEffect(() => {

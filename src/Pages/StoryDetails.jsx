@@ -11,7 +11,7 @@ const StoryDetails = () => {
   const [story, setStory] = useState({});
   const { setLoading } = useContext(LoaderContext);
 
-  console.log("story:", story);
+  ("story:", story);
 
   const getStoryById = useCallback(() => {
     if (!id) return;
@@ -24,7 +24,7 @@ const StoryDetails = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.log("error:", error);
+        ("error:", error);
         setLoading(false);
       });
   }, [id]);

@@ -6,9 +6,12 @@ import TextInput from "../Common/TextInput";
 import axiosInstance from "../../utils/axiosInstance";
 import { showToastMessage } from "../../utils/helpers";
 import UserContext from "../../Context/userContext";
+import LoaderContext from "../../Context/loaderContext";
 
 const Login = () => {
   const { setAuth } = useContext(UserContext);
+
+  const { setLoading } = useContext(LoaderContext);
 
   const fields = { email: "", password: "" };
 
@@ -31,6 +34,7 @@ const Login = () => {
     e.preventDefault();
 
     const { email, password } = params;
+    setLoading(true);
     axiosInstance
       .post("/auth/login", {
         email: email,
@@ -48,8 +52,11 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log("error:", error);
+        "error:", error;
         showToastMessage(error?.response?.data?.message, "error");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -81,7 +88,7 @@ const Login = () => {
             error={errors?.password}
           />
 
-          <CommonButton size="sm" styles="w-full  text-md">
+          <CommonButton type="submit" size="sm" styles="w-full  text-md">
             Sign In
           </CommonButton>
         </form>

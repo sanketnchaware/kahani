@@ -64,7 +64,7 @@ const Profile = () => {
         setStoriesById(res.data.stories);
       })
       .catch((err) => {
-        console.log("err:", err);
+        "err:", err;
       })
       .finally(() => {
         setLoading(false);
@@ -76,12 +76,12 @@ const Profile = () => {
     axiosInstance
       .delete(`/stories/${id}`)
       .then((res) => {
-        console.log("Story deleted successfully:", res);
+        "Story deleted successfully:", res;
         GetStoriesByUserId();
         dispatch(fetchStories());
       })
       .catch((err) => {
-        console.log("Error deleting story:", err);
+        "Error deleting story:", err;
       })
       .finally(() => {
         setLoading(false);
@@ -128,10 +128,10 @@ const Profile = () => {
       >
         <section className="p-6 lg:sticky top-12 lg:min-h-screen  leftcontainer shadow-sameshadow space-y-8 lg:col-span-3 col-span-12 lg:order-1 order-3">
           <p className="title4 mt-4">Recent stories:</p>
-          {React.Children.toArray(
-            stories?.length > 0 ? (
-              <div className=" space-y-2">
-                {stories?.map((item, index) => (
+          {stories?.length > 0 ? (
+            <div className=" space-y-2">
+              {React.Children.toArray(
+                stories?.map((item, index) => (
                   <div
                     key={item.id}
                     className="space-y-2 shadow-sameshadow text-black rounded-xl px-3 py-2"
@@ -145,13 +145,13 @@ const Profile = () => {
                       </p>
                     </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <div className="flex items-center justify-center w-full h-[40vh]">
-                No Stories Found!
-              </div>
-            )
+                ))
+              )}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center w-full h-[40vh]">
+              No Stories Found!
+            </div>
           )}
         </section>
 

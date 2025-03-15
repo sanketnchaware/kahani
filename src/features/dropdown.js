@@ -19,7 +19,7 @@ const dropdownSlice = createSlice({
     builder
       .addCase(fetchCategoryDropdown.pending, (state) => {})
       .addCase(fetchCategoryDropdown.fulfilled, (state, action) => {
-        console.log("action:", action.payload);
+        ("action:", action.payload);
         state.categories = action.payload.data;
       })
       .addCase(fetchCategoryDropdown.rejected, (state, action) => {

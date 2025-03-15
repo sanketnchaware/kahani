@@ -1,5 +1,5 @@
 import React, { Children, useContext, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import Home from "../Pages/Stories";
 import { Outlet } from "react-router-dom";
 import Navbar from "../Components/Navbar";
@@ -15,7 +15,6 @@ import Loading from "../Components/Loading/Loading";
 const Layout = () => {
   const dispatch = useDispatch();
   const { loading } = useContext(LoaderContext);
-  console.log("manualLoading:", loading);
 
   const loadingSlices = useSelector((state) => state.loading);
 
@@ -23,7 +22,11 @@ const Layout = () => {
     Object.values(loadingSlices).some((value) => value) || loading;
 
   useEffect(() => {
-    dispatch(fetchStories());
+    const path = window.location.pathname;
+
+    if (!path.includes("login") || !path.includes("signup")) {
+      dispatch(fetchStories());
+    }
   }, [dispatch]);
 
   return (

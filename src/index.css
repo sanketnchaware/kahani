@@ -30,120 +30,119 @@ textarea {
 .commonspacing {
   line-height: 155%;
 }
-
-/* fluid text  */
+/* Fluid Text - Mobile Optimized */
 
 h1 {
   @apply commonspacing font-bold;
-  font-size: clamp(4.5rem, 3.375rem + 5vw, 9.375rem);
+  font-size: clamp(2.5rem, 2rem + 5vw, 6rem); /* Reduced min-size for mobile */
   letter-spacing: 2%;
 }
 
 h2 {
   @apply commonspacing font-bold;
-
-  font-size: clamp(3.375rem, 3.1154rem + 1.1538vw, 4.5rem);
+  font-size: clamp(2rem, 1.8rem + 2vw, 4rem);
 }
 
 h3 {
   @apply commonspacing font-bold;
-  font-size: clamp(2.625rem, 2.3077rem + 1.4103vw, 4rem);
+  font-size: clamp(1.75rem, 1.6rem + 1.8vw, 3rem);
 }
 
 h4 {
   @apply commonspacing font-bold;
-  font-size: clamp(2.5rem, 2.2981rem + 0.8974vw, 3.375rem);
+  font-size: clamp(1.5rem, 1.4rem + 1.5vw, 2.5rem);
 }
 
 .h4-title {
   @apply commonspacing font-bold;
-  font-size: clamp(2.5rem, 2.2981rem + 0.8974vw, 3.375rem);
+  font-size: clamp(1.5rem, 1.4rem + 1.5vw, 2.5rem);
 }
 
 .title1-semibold {
   @apply commonspacing font-semibold;
-  font-size: clamp(2.25rem, 2.0769rem + 0.7692vw, 3rem);
+  font-size: clamp(1.5rem, 1.4rem + 1.2vw, 2.5rem);
 }
 
 .title1 {
   @apply commonspacing font-bold;
-  font-size: clamp(1.875rem, 1.6154rem + 1.1538vw, 3rem);
+  font-size: clamp(1.25rem, 1.1rem + 1.5vw, 2.25rem);
 }
 
 .title2 {
   @apply commonspacing font-semibold;
-  font-size: clamp(1.875rem, 1.7885rem + 0.3846vw, 2.25rem);
+  font-size: clamp(1.125rem, 1.05rem + 1.2vw, 2rem);
 }
 
 .title3 {
   @apply commonspacing font-semibold;
-  font-size: clamp(1.5rem, 1.3846rem + 0.5128vw, 2rem);
+  font-size: clamp(1rem, 0.95rem + 1vw, 1.75rem);
 }
 
 .title4-medium {
   @apply commonspacing font-medium;
-  font-size: clamp(1.25rem, 1.1923rem + 0.2564vw, 1.5rem);
+  font-size: clamp(0.875rem, 0.8rem + 0.8vw, 1.5rem);
 }
 
 .title4-semibold {
   @apply commonspacing font-[600];
-  font-size: clamp(1.25rem, 1.1923rem + 0.2564vw, 1.5rem);
+  font-size: clamp(0.875rem, 0.8rem + 0.8vw, 1.5rem);
 }
 
 .title4 {
   @apply commonspacing font-semibold;
-  font-size: clamp(1.25rem, 1.1923rem + 0.2564vw, 1.5rem);
+  font-size: clamp(0.875rem, 0.8rem + 0.8vw, 1.5rem);
 }
 
 .body1 {
   @apply commonspacing font-medium;
-  font-size: clamp(1.125rem, 1.0962rem + 0.1282vw, 1.25rem);
+  font-size: clamp(0.875rem, 0.85rem + 0.5vw, 1.25rem);
 }
 
 .body1b {
   @apply commonspacing font-bold;
-  font-size: clamp(1.125rem, 1.0962rem + 0.1282vw, 1.25rem);
+  font-size: clamp(0.875rem, 0.85rem + 0.5vw, 1.25rem);
 }
 
 .body2 {
   @apply commonspacing font-normal;
-  font-size: clamp(1rem, 0.9712rem + 0.1282vw, 1.125rem);
+  font-size: clamp(0.8125rem, 0.78rem + 0.4vw, 1.125rem);
 }
 
 .body2b {
   @apply commonspacing font-bold;
-  font-size: clamp(1rem, 0.9712rem + 0.1282vw, 1.125rem);
+  font-size: clamp(0.8125rem, 0.78rem + 0.4vw, 1.125rem);
 }
 
 .body3 {
   @apply commonspacing font-normal;
-  font-size: clamp(0.875rem, 0.8462rem + 0.1282vw, 1rem);
+  font-size: clamp(0.75rem, 0.72rem + 0.3vw, 1rem);
 }
 
 .body3b {
   @apply commonspacing font-semibold;
-  font-size: clamp(0.875rem, 0.8462rem + 0.1282vw, 1rem);
+  font-size: clamp(0.75rem, 0.72rem + 0.3vw, 1rem);
 }
 
 .body4 {
   @apply commonspacing font-normal;
-  font-size: clamp(0.75rem, 0.7212rem + 0.1282vw, 0.875rem);
+  font-size: clamp(0.6875rem, 0.66rem + 0.3vw, 0.875rem);
 }
 
 .body4b {
   @apply commonspacing font-semibold;
-  font-size: clamp(0.75rem, 0.7212rem + 0.1282vw, 0.875rem);
+  font-size: clamp(0.6875rem, 0.66rem + 0.3vw, 0.875rem);
 }
 
 .caption {
   @apply commonspacing font-normal;
-  font-size: clamp(0.6875rem, 0.6731rem + 0.0641vw, 0.75rem);
+  font-size: clamp(0.625rem, 0.6rem + 0.2vw, 0.75rem);
 }
 
 .micro {
   @apply commonspacing font-normal;
-  font-size: clamp(0.625rem, 0.6106rem + 0.0641vw, 0.6875rem);
+  font-size: clamp(0.5625rem, 0.55rem + 0.15vw, 0.6875rem);
 }
+
 
 /* LoadingOverlay.css */
 

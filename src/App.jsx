@@ -16,10 +16,10 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Introduction />} />
           <Route path="/auth/google" component={GoogleCallback} />
           <Route path="/login" element={<Auth />} />
           <Route path="/signup" element={<Auth />} />
+          <Route index element={<Introduction />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/stories" element={<Stories />} />
           <Route path="/stories/:id" element={<StoryDetails />} />

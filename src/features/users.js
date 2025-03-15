@@ -32,7 +32,7 @@ const userSlice = createSlice({
       .addCase(fetchUsers.pending, (state) => {})
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.users = action.payload.data;
-        console.log("action.payload.data:", action.payload.data);
+        ("action.payload.data:", action.payload.data);
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.error = action.error.message;
