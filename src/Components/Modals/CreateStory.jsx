@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { X, Hash, BookOpen, Tag } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import axiosInstance from "../../utils/axiosInstance";
@@ -7,6 +7,7 @@ import CommonButton from "../Common/CommonButton";
 import SelectDropdown from "../Common/SelectDropdown";
 import TextInput from "../Common/TextInput";
 import { fetchCategoryDropdown } from "../../features/dropdown";
+import LoaderContext from "../../Context/loaderContext";
 
 const CreateStory = ({
   open,
@@ -22,6 +23,7 @@ const CreateStory = ({
   const [tag, setTag] = useState("");
   const { categories } = useSelector((state) => state.dropdown);
   const dispatch = useDispatch();
+  const { loading, setLoading } = useContext(LoaderContext);
 
   useEffect(() => {
     dispatch(fetchCategoryDropdown());
@@ -45,6 +47,7 @@ const CreateStory = ({
   };
 
   const getStoryByID = () => {
+    setLoading(true);
     axiosInstance
       .get(`/stories/${storyId}`)
       .then((res) => {
@@ -56,7 +59,8 @@ const CreateStory = ({
           category: res?.data?.story?.category?._id,
         });
       })
-      .catch((err) => ("err:", err));
+      .catch((err) => ("err:", err))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -171,21 +175,23 @@ const CreateStory = ({
               {/* Tags Display */}
               {params?.tags?.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {params.tags.filter(isNaN).map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
-                    >
-                      <Tag className="w-4 h-4 text-gray-600" />
-                      <span className="text-sm font-medium">#{item}</span>
-                      <button
-                        onClick={() => removeTag(item)}
-                        className="hover:text-red-500"
+                  {React.Children.toArray(
+                    params.tags.filter(isNaN).map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
                       >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
+                        <Tag className="w-4 h-4 text-gray-600" />
+                        <span className="text-sm font-medium">#{item}</span>
+                        <button
+                          onClick={() => removeTag(item)}
+                          className="hover:text-red-500"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))
+                  )}
                 </div>
               )}
             </div>

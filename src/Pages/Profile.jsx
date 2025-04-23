@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import CreateStory from "../Components/Modals/CreateStory";
 import gsap from "gsap/dist/gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+
 import axiosInstance from "../utils/axiosInstance";
-import cross from "../assets/icons/cross.svg";
-import Loading from "../Components/Loading/Loading";
+
 import { showToastMessage } from "../utils/helpers";
 import CommonButton from "../Components/Common/CommonButton";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +12,7 @@ import UserContext from "../Context/userContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStories } from "../features/stories";
 import LoaderContext from "../Context/loaderContext";
+
 const Profile = () => {
   const navigate = useNavigate();
 
@@ -172,56 +172,58 @@ const Profile = () => {
           {React.Children.toArray(
             storiesById?.length > 0 ? (
               <div className=" space-y-6">
-                {storiesById?.map((item, index) => (
-                  <div
-                    key={item.id}
-                    className="space-y-4 shadow-sameshadow text-black rounded-xl p-4"
-                  >
-                    <div className="flex justify-between">
-                      <p className="body2b">
-                        {index + 1}. <span className="">{item?.title}</span>
-                      </p>
+                {React.Children.toArray(
+                  storiesById?.map((item, index) => (
+                    <div
+                      key={item.id}
+                      className="space-y-4 shadow-sameshadow text-black rounded-xl p-4"
+                    >
+                      <div className="flex justify-between">
+                        <p className="body2b">
+                          {index + 1}. <span className="">{item?.title}</span>
+                        </p>
 
-                      <p className="bg-red-400 flex items-center caption  rounded-full px-3 ">
-                        {item?.category?.name}
-                      </p>
-                    </div>
-                    <div className="space-y-4">
-                      <p className="body3 font-wendy">{item?.description}</p>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {item?.tags?.map((tag, tagIndex) => (
-                          <div
-                            key={tagIndex}
-                            className="bg-gray-200 body3b rounded-xl text-black px-3 py-1"
-                          >
-                            #{tag}
-                          </div>
-                        ))}
+                        <p className="bg-gray-200 flex items-center caption  rounded-full px-3 ">
+                          {item?.category?.name}
+                        </p>
+                      </div>
+                      <div className="space-y-4">
+                        <p className="body3 font-wendy">{item?.description}</p>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {item?.tags?.map((tag, tagIndex) => (
+                            <div
+                              key={tagIndex}
+                              className="bg-gray-200 body3b rounded-xl text-black px-3 py-1"
+                            >
+                              #{tag}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="justify-end gap-4  flex">
+                        <button
+                          className="contained_button"
+                          onClick={() => {
+                            SetStoryId(item?._id);
+                            toggleStoryModal();
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <CommonButton
+                          loading={loading}
+                          onClick={() => deleteStory(item?._id)}
+                          styles="w-fit text-xs"
+                          size="sm"
+                          variant="secondary"
+                        >
+                          Delete
+                        </CommonButton>
                       </div>
                     </div>
-
-                    <div className="justify-end gap-4  flex">
-                      <button
-                        className="contained_button"
-                        onClick={() => {
-                          SetStoryId(item?._id);
-                          toggleStoryModal();
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <CommonButton
-                        loading={loading}
-                        onClick={() => deleteStory(item?._id)}
-                        styles="w-fit text-xs"
-                        size="sm"
-                        variant="secondary"
-                      >
-                        Delete
-                      </CommonButton>
-                    </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             ) : (
               <div className="flex items-center justify-center w-full h-[40vh]">

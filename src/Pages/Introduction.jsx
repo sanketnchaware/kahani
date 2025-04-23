@@ -63,7 +63,7 @@ const Introduction = () => {
               </CommonButton>
             </Link>
           ) : (
-            <Link to="/stories" className="flex justify-center   w-full">
+            <Link to="/profile" className="flex justify-center   w-full">
               <CommonButton styles="w-fit " size="md">
                 Add Story
               </CommonButton>

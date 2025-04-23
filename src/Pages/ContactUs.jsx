@@ -40,7 +40,7 @@ const ContactForm = () => {
               <Mail className="w-8 h-8 mb-4" />
               <p className=" title4 font-semibold mb-2">Email Us</p>
               <p title4 className="text-gray-300">
-                stories@example.com
+                sanketnchaware@gmail.com
               </p>
             </div>
           </div>
@@ -50,7 +50,7 @@ const ContactForm = () => {
               <Phone className="w-8 h-8 mb-4" />
               <p className=" title4 font-semibold mb-2">Call Us</p>
               <p title4 className="text-gray-300">
-                +1 (555) 123-4567
+                +91 8378910529
               </p>
             </div>
           </div>
@@ -60,7 +60,7 @@ const ContactForm = () => {
               <MapPin className="w-8 h-8 mb-4" />
               <p className=" title4 font-semibold mb-2">Visit Us</p>
               <p title4 className="text-gray-300">
-                123 Story Street, Writer's Block, NY 10001
+                Samarth Nagar, Near Tahasil Office, Risod, Maharashtra, India.
               </p>
             </div>
           </div>

@@ -8,7 +8,7 @@ const Loading = () => {
         <div className="spinner"></div>
       </div>
       <p className="font-bold text-center text-yellow-500">
-        As free tier db storage is used, it might take a few seconds to load.
+        Since free hosting service is used, it might take a few seconds to load.
         Please hold on !
       </p>
     </div>

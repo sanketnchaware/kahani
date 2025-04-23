@@ -45,7 +45,7 @@ const Home = () => {
     "Science Fiction",
     "Thriller",
     "Western",
-    "Dystopian",
+    "Motivational",
     "Magical Realism",
     "Realist",
     "Satire",
@@ -56,9 +56,12 @@ const Home = () => {
     "Parable",
   ];
 
-  const filteredStories = stories.filter(
-    (item) => item?.category?.name === tabOptions[categoryindex]
-  );
+  const filteredStories =
+    categoryindex === 0
+      ? stories
+      : stories.filter(
+          (item) => item?.category?.name === tabOptions[categoryindex - 1]
+        );
 
   const [openCreateStory, setCreateOpenStory] = useState(false);
 
