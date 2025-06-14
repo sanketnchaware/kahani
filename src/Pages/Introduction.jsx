@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CommonButton from "../Components/Common/CommonButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TextInput from "../Components/Common/TextInput";
 import UserContext from "../Context/userContext";
@@ -33,6 +33,11 @@ const Introduction = () => {
   const {
     auth: { user, isAuthenticated },
   } = useContext(UserContext);
+
+  const { categories } = useSelector((state) => state.dropdown);
+  console.log("categories:", categories);
+
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
 
@@ -78,13 +83,13 @@ const Introduction = () => {
 
           <div className="grid lg:grid-cols-4 grid-cols-2 w-full items-center h-full">
             {React.Children.toArray(
-              storyCategories.map((item, index) => {
+              categories?.map((item) => {
                 return (
                   <Link
-                    to={`/stories?tab=${index}`}
+                    to={`/stories?cat=${item?.slug}`}
                     className="p-4 body3 lg:body1  text-center"
                   >
-                    {item}
+                    {item?.name}
                   </Link>
                 );
               })
@@ -98,7 +103,7 @@ const Introduction = () => {
           <h4 className="">Best Stories For Today</h4>
           <div className=" grid gtid-cols-1 lg:grid-cols-4 gap-6">
             {React.Children.toArray(
-              stories?.map(({ title, description, user }) => {
+              stories?.map(({ title, description, user, _id }) => {
                 return (
                   <div className="   rounded-lg shadow-sameshadow">
                     <div className="h-44  w-full relative">
@@ -127,7 +132,10 @@ const Introduction = () => {
                         <p className="line-clamp-2">{description}</p>
                       </div>
 
-                      <Link className="block underline  body4b" to="/">
+                      <Link
+                        className="block underline  body4b"
+                        to={`/stories/${_id}`}
+                      >
                         Read More..
                       </Link>
                     </div>

@@ -1,72 +1,59 @@
-import { useState, useRef, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-const CommonTabs = ({ tabOptions, categoryindex = 0 }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const queryIndex = searchParams.get("tab") || categoryindex;
-  const [activeTab, setActiveTab] = useState(Number(queryIndex));
+const CommonTabs = ({ tabOptions }) => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const urlQuery = searchParams.get("cat") || "all";
 
-  const tabContainerRef = useRef(null);
-  const tabRefs = useRef([]);
+  const tabRefs = useRef({}); // To hold refs for each tab
 
-  const handleTabClick = (index) => {
-    setActiveTab(index);
-    setSearchParams({ tab: index });
-    if (index !== 0) scrollToTab(index - 1); // shift because "All" is outside scroll
+  const changeQueryInURL = (slug) => {
+    const query = slug !== "all" ? `?cat=${slug}` : "";
+    navigate(`/stories${query}`);
+    scrollToTab(slug);
   };
 
-  const scrollToTab = (index) => {
-    if (tabContainerRef.current && tabRefs.current[index]) {
-      const container = tabContainerRef.current;
-      const tab = tabRefs.current[index];
-
-      const containerCenter = container.offsetWidth / 2;
-      const tabLeft = tab.offsetLeft + tab.offsetWidth / 2;
-      const scrollPosition = tabLeft - containerCenter;
-
-      container.scrollTo({
-        left: scrollPosition,
+  const scrollToTab = (slug) => {
+    const tabElement = tabRefs.current[slug];
+    if (tabElement && tabElement.scrollIntoView) {
+      tabElement.scrollIntoView({
         behavior: "smooth",
+        inline: "center",
+        block: "nearest",
       });
     }
   };
 
+  // Scroll on mount based on URL
   useEffect(() => {
-    if (Number(queryIndex) !== 0) {
-      scrollToTab(Number(queryIndex) - 1); // -1 for offset due to "All"
-    }
-  }, [queryIndex]);
+    scrollToTab(urlQuery);
+  }, [urlQuery]);
 
   return (
     <div className="w-full flex items-center space-x-2 px-2">
-      {/* Fixed "All" button */}
       <button
-        className={`px-4 py-2 mb-0 md:mb-4 whitespace-nowrap rounded-md transition-all ${
-          activeTab === 0 ? "bg-black text-white" : "bg-gray-200 text-black"
+        onClick={() => changeQueryInURL("all")}
+        ref={(el) => (tabRefs.current["all"] = el)}
+        className={`lg:mb-4 mb-0 px-4 py-2 whitespace-nowrap rounded-md transition-all ${
+          urlQuery === "all" ? "bg-black text-white" : ""
         }`}
-        onClick={() => handleTabClick(0)}
       >
         All
       </button>
 
-      {/* Scrollable tab container */}
-      <div
-        ref={tabContainerRef}
-        className="flex-1 overflow-x-auto scrollbar-hide"
-      >
-        <div className="flex space-x-2  w-max">
+      <div className="flex-1 overflow-x-auto scrollbar-hide">
+        <div className="flex space-x-2 w-max">
           {tabOptions.map((tab, index) => (
             <button
               key={index}
-              ref={(el) => (tabRefs.current[index] = el)}
+              ref={(el) => (tabRefs.current[tab?.slug] = el)}
+              onClick={() => changeQueryInURL(tab?.slug)}
               className={`px-4 py-2 whitespace-nowrap rounded-md transition-all ${
-                activeTab === index + 1
-                  ? "bg-black text-white"
-                  : "bg-gray-200 text-black"
+                urlQuery === tab?.slug ? "bg-black text-white" : ""
               }`}
-              onClick={() => handleTabClick(index + 1)}
             >
-              {tab}
+              {tab?.name}
             </button>
           ))}
         </div>

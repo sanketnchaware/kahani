@@ -6,7 +6,7 @@ import { showToastMessage } from "../../utils/helpers";
 import CommonButton from "../Common/CommonButton";
 import SelectDropdown from "../Common/SelectDropdown";
 import TextInput from "../Common/TextInput";
-import { fetchCategoryDropdown } from "../../features/dropdown";
+
 import LoaderContext from "../../Context/loaderContext";
 
 const CreateStory = ({
@@ -25,9 +25,7 @@ const CreateStory = ({
   const dispatch = useDispatch();
   const { loading, setLoading } = useContext(LoaderContext);
 
-  useEffect(() => {
-    dispatch(fetchCategoryDropdown());
-  }, []);
+ 
 
   const handleTagChange = (e) => {
     const input = e.target.value;

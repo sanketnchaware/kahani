@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import CommonButton from "../Common/CommonButton";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,7 +22,7 @@ const Signup = () => {
 
   const handleChange = (e) => {
     const { name, value } = e?.target;
-    ("name, value:", name, value);
+    "name, value:", name, value;
 
     setParams({ ...params, [name]: value });
   };
@@ -46,17 +45,23 @@ const Signup = () => {
         navigate("/login");
       })
       .catch((error) => {
-        ("error:", error);
+        "error:", error;
       });
   };
 
   return (
     <div className="flex items-center justify-center h-screen bg-blue-50">
       <div className="bg-white rounded-lg shadow-md p-8 max-w-lg w-full">
-        <form className="mb-4 space-y-4" onSubmit={handleSubmit}>
+        <form
+          method="POST"
+          action="/users"
+          className="mb-4 space-y-4"
+          onSubmit={handleSubmit}
+        >
           <h2 className="text-3xl font-bold text-center ">
             Create New Account{" "}
           </h2>
+
           <TextInput
             type="text"
             name="firstname"

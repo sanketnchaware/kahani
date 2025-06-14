@@ -4,7 +4,7 @@ import axiosInstance from "../utils/axiosInstance";
 export const fetchCategoryDropdown = createAsyncThunk(
   "dropdown/fetchCategoryDropdown",
   async () => {
-    const response = await axiosInstance.get("/categories/dropdown");
+    const response = await axiosInstance.get("/categories");
     return response.data;
   }
 );
@@ -19,7 +19,6 @@ const dropdownSlice = createSlice({
     builder
       .addCase(fetchCategoryDropdown.pending, (state) => {})
       .addCase(fetchCategoryDropdown.fulfilled, (state, action) => {
-        ("action:", action.payload);
         state.categories = action.payload.data;
       })
       .addCase(fetchCategoryDropdown.rejected, (state, action) => {

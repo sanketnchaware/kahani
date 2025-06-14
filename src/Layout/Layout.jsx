@@ -10,6 +10,7 @@ import ScrollToTop from "../Components/ScrolltoTop";
 import MobileSidebar from "../Components/MobileSidebar/MobileSidebar";
 import LoaderContext from "../Context/loaderContext";
 import Loading from "../Components/Loading/Loading";
+import { fetchCategoryDropdown } from "../features/dropdown";
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Layout = () => {
 
     if (!path.includes("login") || !path.includes("signup")) {
       dispatch(fetchStories());
+      dispatch(fetchCategoryDropdown());
     }
   }, [dispatch]);
 

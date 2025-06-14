@@ -25,7 +25,8 @@ const Home = () => {
 
   const query = new URLSearchParams(location.search);
 
-  const categoryindex = +query.get("tab");
+  const category = query.get("cat") || "all";
+  console.log("category:", category);
 
   const { setLoading } = useContext(LoaderContext);
 
@@ -33,39 +34,40 @@ const Home = () => {
 
   const main = useRef(null);
 
-  const tabOptions = [
-    "Adventure",
-    "Comedy",
-    "Drama",
-    "Fantasy",
-    "Historical Fiction",
-    "Horror",
-    "Mystery",
-    "Romance",
-    "Science Fiction",
-    "Thriller",
-    "Western",
-    "Motivational",
-    "Magical Realism",
-    "Realist",
-    "Satire",
-    "Tragedy",
-    "Mythology",
-    "Folklore",
-    "Fairy Tale",
-    "Parable",
-  ];
-
-  const filteredStories =
-    categoryindex === 0
-      ? stories
-      : stories.filter(
-          (item) => item?.category?.name === tabOptions[categoryindex - 1]
-        );
+  const { categories } = useSelector((state) => state.dropdown);
+  console.log("categories:", categories);
 
   const [openCreateStory, setCreateOpenStory] = useState(false);
 
   const [storyId, SetStoryId] = useState("");
+
+  const [searchKey, setSearchKey] = useState("");
+
+  const [debounceValue, setDebounceValue] = useState("");
+
+  const filteredStories = stories.filter((story) => {
+    const matchesCategory =
+      category === "all" || story?.category?.slug === category;
+
+    const matchesSearch =
+      debounceValue.trim() === "" ||
+      story?.title?.toLowerCase().includes(debounceValue.toLowerCase()) ||
+      story?.description?.toLowerCase().includes(debounceValue.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebounceValue(searchKey);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchKey]);
+
+  const handleSearchKey = (e) => {
+    setSearchKey(e.target.value);
+  };
 
   const fields = {
     title: "",
@@ -133,6 +135,7 @@ const Home = () => {
                 </div> */}
                 <div className="relative">
                   <input
+                    onChange={handleSearchKey}
                     placeholder="Search stories..."
                     type="text"
                     className="w-full text-black pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition duration-200"
@@ -141,10 +144,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <CommonTabs
-                categoryindex={categoryindex}
-                tabOptions={tabOptions}
-              />
+              <CommonTabs urlQuery={category} tabOptions={categories} />
 
               {/* Stories List */}
               {filteredStories?.length > 0 ? (

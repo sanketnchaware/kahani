@@ -40,21 +40,40 @@ router.get("/dropdown", async (req, res) => {
   }
 });
 
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9 -]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+};
+
 // Create a new category
 router.post("/", async (req, res) => {
   try {
-    if (!req.body.name) {
-      return res.status(400).send({ message: "Category name is required !" });
+    const { name } = req.body;
+
+    if (!name) {
+      return res.status(400).send({ message: "Category name is required!" });
     }
 
-    const newCategory = await Category.create({ ...req.body });
+    const slug = slugify(name);
+
+    const existing = await Category.findOne({ slug });
+    if (existing) {
+      return res.status(400).send({ message: "Category already exists!" });
+    }
+
+    const newCategory = await Category.create({ name, slug });
 
     return res
       .status(201)
-      .send({ data: newCategory, message: "Category created successfully !" });
+      .send({ data: newCategory, message: "Category created successfully!" });
   } catch (error) {
     return res.status(500).send({
-      message: "An error occurred while creating the category !",
+      message: "An error occurred while creating the category!",
       error: error.message,
     });
   }

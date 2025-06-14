@@ -12,6 +12,7 @@ import UserContext from "../Context/userContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStories } from "../features/stories";
 import LoaderContext from "../Context/loaderContext";
+import { Edit } from "lucide-react";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -124,7 +125,7 @@ const Profile = () => {
     <>
       <div
         ref={main}
-        className="HomemainContainer mt-12 col-span-12 min-h-screen grid grid-cols-12   "
+        className="HomemainContainer mt-12 col-span-12 min-h-screen grid grid-cols-12"
       >
         <section className="p-6 lg:sticky top-12 lg:min-h-screen  leftcontainer shadow-sameshadow space-y-8 lg:col-span-3 col-span-12 lg:order-1 order-3">
           <p className="title4 mt-4">Recent stories:</p>
@@ -235,20 +236,39 @@ const Profile = () => {
 
         <section className="shadow-sameshadow   rightcontainer p-6 space-y-6 lg:col-span-3 lg:order-3 order-1 lg:sticky col-span-12  top-12 lg:min-h-screen">
           <p className="title4 text-center w-full pt-6 ">My profile</p>
-          <div className="  h-full w-full flex  flex-col items-center ">
-            <div className="mt-4 w-28 h-28 rounded-full   overflow-hidden">
-              <img
-                className="w-full h-full object-cover"
-                src="https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt=""
-              />
+          <form
+            action=""
+            className="  h-full w-full flex  flex-col items-center "
+          >
+            <div className="mt-4 w-28 h-28 rounded-full border   overflow-hidden">
+              {user?.profile_pic ? (
+                <img
+                  className="w-full h-full object-cover"
+                  src={user?.profile_pic}
+                  alt=""
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <input
+                    // onChange={handleProfilePicChange}
+                    className=" hidden debug w-full"
+                    type="file"
+                    name="profile_pic"
+                    id="profile_pic"
+                  />
+
+                  <label htmlFor="profile_pic" style={{ cursor: "pointer" }}>
+                    <Edit />
+                  </label>
+                </div>
+              )}
             </div>
             <p className="body2 mt-4 text-center w-full ">
               {user?.firstname} {user?.lastname}
             </p>
             <p className="body4b">{user?.email}</p>
             <p className="body4b">{user?.phone}</p>
-          </div>
+          </form>
         </section>
       </div>
 
