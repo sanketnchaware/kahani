@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
 // Get By Id
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findOne({ id: req.params.id }).lean().exec();
+    const user = await User.findOne({ _id: req.params.id }).lean().exec();
     if (user) {
       return res.status(200).send({
         data: user,
@@ -53,7 +53,7 @@ router.get("/:id", async (req, res) => {
 // Uppdate
 router.put("/:id", async (req, res) => {
   try {
-    const existingUser = await User.findOne({ id: req.params.id })
+    const existingUser = await User.findOne({ _id: req.params.id })
       .lean()
       .exec();
 
@@ -71,7 +71,7 @@ router.put("/:id", async (req, res) => {
     }
 
     const updatedUser = await User.findOneAndUpdate(
-      { id: req.params.id },
+      { _id: req.params.id },
       { ...req.body },
       { new: true }
     )

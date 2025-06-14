@@ -145,7 +145,7 @@ const CreateStory = ({
                     <input
                       type="text"
                       name="tag"
-                      className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition duration-200"
+                      className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-xl text-black focus:ring-2 focus:ring-black focus:border-transparent transition duration-200"
                       placeholder="Add tags (comma separated)"
                       value={tag}
                       onChange={handleTagChange}
@@ -165,7 +165,7 @@ const CreateStory = ({
                     options={categories}
                     placeholder="Choose category"
                     error={errors?.category}
-                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition duration-200"
+                    className="w-full px-4 py-3 bg-white   border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition duration-200"
                   />
                 </div>
               </div>

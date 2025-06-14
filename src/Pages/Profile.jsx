@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchStories } from "../features/stories";
 import LoaderContext from "../Context/loaderContext";
 import { Edit } from "lucide-react";
+import ImageUploader from "../Components/Common/ImageUploader";
+import axios from "axios";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const Profile = () => {
   const {
     auth: { user },
   } = useContext(UserContext);
+  console.log("user:", user);
 
   const { loading, setLoading } = useContext(LoaderContext);
 
@@ -53,6 +56,41 @@ const Profile = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setParams({ ...params, [name]: value });
+  };
+
+  const handleProfilePicChange = async (e) => {
+    e.preventDefault();
+
+    const file = e.target.files[0];
+
+    if (!file) return alert("Please select an image first!");
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "kahani_images");
+
+    try {
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/kahani/image/upload",
+        formData
+      );
+
+      await axiosInstance
+        .put(`/users/${user?.id}`, {
+          profile_pic: res.data.secure_url,
+        })
+        .then((response) => {
+          console.log("response:", response);
+        })
+        .catch((error) => {
+          console.log("error:", error);
+        });
+
+      // OPTIONAL: send `res.data.secure_url` to your backend API to store in DB
+      // await axios.post('/api/save-image-url', { url: res.data.secure_url });
+    } catch (error) {
+      console.error("Upload Error:", error);
+    }
   };
 
   const main = useRef(null);
@@ -240,6 +278,7 @@ const Profile = () => {
             action=""
             className="  h-full w-full flex  flex-col items-center "
           >
+            {" "}
             <div className="mt-4 w-28 h-28 rounded-full border   overflow-hidden">
               {user?.profile_pic ? (
                 <img
@@ -250,7 +289,7 @@ const Profile = () => {
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <input
-                    // onChange={handleProfilePicChange}
+                    onChange={handleProfilePicChange}
                     className=" hidden debug w-full"
                     type="file"
                     name="profile_pic"
