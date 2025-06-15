@@ -28,9 +28,16 @@ router.post("/", async (req, res) => {
   try {
     if (!isPresent) {
       const data = await Subscriber.create({ email: email });
-      res.status(200).send({ message: "Email Subscribed !", data: data });
+      res
+        .status(200)
+        .send({
+          message: "Thanks for subscribing to our newsletter !",
+          data: data,
+        });
     } else {
-      return res.status(404).send({ message: "Email already Subscribed !" });
+      return res
+        .status(404)
+        .send({ message: "Already Subscribed to Newsletter !" });
     }
   } catch (error) {
     return res.status(500).send({ message: error.message });

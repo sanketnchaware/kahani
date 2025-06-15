@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TextInput from "../Components/Common/TextInput";
 import UserContext from "../Context/userContext";
+import { showToastMessage } from "../utils/helpers";
+import axiosInstance from "../utils/axiosInstance";
 
 const Introduction = () => {
   const { stories } = useSelector((state) => state.stories);
@@ -15,6 +17,20 @@ const Introduction = () => {
   console.log("categories:", categories);
 
   const [email, setEmail] = useState("");
+
+  const SubscribeNewsletter = async (e) => {
+    e.preventDefault();
+    await axiosInstance
+      .post(`/subcribe`, { email })
+      .then((response) => {
+        console.log("response:", response);
+        showToastMessage(response?.data?.message, "success");
+        setEmail("");
+      })
+      .catch((error) => {
+        showToastMessage(error?.response?.data?.message, "error");
+      });
+  };
 
   return (
     <div className="divide-y-2">
@@ -149,14 +165,9 @@ const Introduction = () => {
               Subscribe to our newsletter and be the first to know about new
               stories, platform updates, and exclusive content from Kahani.
             </p>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert("Subscribed !");
-              }}
-              className="space-y-6"
-            >
+            <form onSubmit={SubscribeNewsletter} className="space-y-6">
               <TextInput
+                required={true}
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);

@@ -7,11 +7,13 @@ const TextInput = ({
   placeholder,
   type = "text",
   className = "",
+  required,
   error = "", // Accept an error message prop
 }) => {
   return (
     <div className="relative w-full">
       <input
+        required={required}
         type={type}
         name={name}
         value={value}
