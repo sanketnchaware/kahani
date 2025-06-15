@@ -278,7 +278,7 @@ const Home = () => {
                 {/* Trending Stories List */}
                 <div className="space-y-2">
                   {React.Children.toArray(
-                    stories?.map((item) => (
+                    stories?.slice(0, 4)?.map((item) => (
                       <Link
                         to={`/stories/${item?._id}`}
                         key={item?._id}
