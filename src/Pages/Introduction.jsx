@@ -36,16 +36,13 @@ const Introduction = () => {
     <div className="divide-y-2">
       <section className="flex justify-between gap-4 lg:flex-row flex-col-reverse items-center default_section bg-black text-white">
         <div className="w-11/12 lg:w-7/12 space-y-6">
-          <h1 className="text-center lg:text-start title1">
+          <h2 className="text-center lg:text-start ">
             Hey {user?.firstname}! Ready to Share Your Story?
-          </h1>
-          <p className="title4 text-center lg:text-start text-gray-300">
-            Discover, read, and write stories that touch the heart. <br />
-            <span className="text-yellow-400 font-semibold">Kahani</span> is
+          </h2>
+          <p className="title3 text-center lg:text-start text-gray-300">
+            Discover, read, and write stories that touch the heart.
+            <span className="text-yellow-400 font-semibold"> Kahani </span>is
             your space to create, connect, and inspire.
-          </p>
-          <p className="title5 text-center lg:text-start text-gray-400">
-            Start your journey today — because every story deserves to be heard.
           </p>
         </div>
 
@@ -59,12 +56,12 @@ const Introduction = () => {
       </section>
 
       <section className="default_section   text-black ">
-        <div className=" space-y-4 w-11/12 m-auto">
+        <div className=" space-y-6 w-11/12 m-auto">
           {/* <img className="h-[45vh] m-auto" src={expressive} alt="hero_logo" /> */}
-
-          <div>
-            <h2 className="text-center w-full">Start writing your story..</h2>
-          </div>
+          <h2 className="text-center w-full">Start writing your story..</h2>{" "}
+          <p className="title4 text-center  text-gray-400">
+            Start your journey today — because every story deserves to be heard.
+          </p>
           {!isAuthenticated ? (
             <Link to="/signup" className="flex justify-center   w-full">
               <CommonButton styles="w-fit " size="md">
