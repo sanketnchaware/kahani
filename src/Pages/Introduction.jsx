@@ -103,41 +103,36 @@ const Introduction = () => {
           <h4 className="">Best Stories For Today</h4>
           <div className=" grid gtid-cols-1 lg:grid-cols-4 gap-6">
             {React.Children.toArray(
-              stories?.map(({ title, description, user, _id }) => {
+              stories?.map(({ title, category, description, user, _id }) => {
                 return (
-                  <div className="   rounded-lg shadow-sameshadow">
-                    <div className="h-44  w-full relative">
-                      <div className="absolute left-4 top-4 flex gap-1 z-10 bg-white rounded-full body4 shadow-inner px-2 items-center py-1">
-                        {/* <div className="w-6 h-6 rounded-full overflow-hidden">
-                          <img
-                            className="object-cover w-full h-full"
-                            src="https://images.pexels.com/photos/3770357/pexels-photo-3770357.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt=""
-                          />{" "}
-                        </div> */}
-                        <span>
-                          {user?.firstname} {user?.lastname}
+                  <div className="rounded-lg shadow-sameshadow hover:shadow-lg transition-shadow duration-300 bg-white">
+                    <div className="p-4 space-y-3">
+                      {/* Story Title */}
+                      <div className="flex justify-between items-center">
+                        <h3 className="body1b text-lg font-semibold text-gray-800">
+                          {title}{" "}
+                        </h3>
+                        <p className="text-xs">( {category?.name} )</p>
+                      </div>
+
+                      {/* Short Description */}
+                      <p className="text-sm text-gray-600 line-clamp-2">
+                        {description}
+                      </p>
+
+                      {/* Author & Read More */}
+                      <div className="flex items-center justify-between pt-2 border-t border-gray-200 mt-2">
+                        <span className="text-xs text-gray-500 font-medium">
+                          By {user?.firstname} {user?.lastname}
                         </span>
-                      </div>
-                      {/* <img
-                        className="rounded-tl-lg rounded-tr-lg grayscale  w-full h-full object-cover"
-                        src="https://images.unsplash.com/photo-1735657061774-a9d62d06c954?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                      /> */}
-                    </div>
 
-                    <div className="p-4 space-y-2">
-                      <p className="body1b">{title}</p>
-                      <div className="body4 h-10 text-ellipsis overflow-hidden ">
-                        <p className="line-clamp-2">{description}</p>
+                        <Link
+                          to={`/stories/${_id}`}
+                          className="text-xs font-semibold text-primary hover:underline transition-all"
+                        >
+                          Read full story →
+                        </Link>
                       </div>
-
-                      <Link
-                        className="block underline  body4b"
-                        to={`/stories/${_id}`}
-                      >
-                        Read More..
-                      </Link>
                     </div>
                   </div>
                 );

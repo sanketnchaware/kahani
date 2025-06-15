@@ -153,32 +153,29 @@ const Home = () => {
                     filteredStories.map((item) => (
                       <div
                         key={item?.id}
-                        className="w-full   bg-white  p-2 lg:p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-200"
+                        className="w-full bg-white p-4 md:p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-200"
                       >
                         <div className="flex flex-col md:flex-row gap-6">
-                          {/* <div className="">
-                          <div className="h-40 aspect-video w-40 rounded-xl overflow-hidden">
-                            <img
-                              className="w-full h-full object-cover hover:scale-105 transition duration-200"
-                              src="https://images.pexels.com/photos/3770357/pexels-photo-3770357.jpeg?auto=compress&cs=tinysrgb&w=600"
-                              alt={item?.title}
-                            />
-                          </div>
-                        </div> */}
-                          <div className="w-full space-y-3">
-                            <div className="flex justify-between items-center w-full">
-                              <h2 className="text-xl font-bold hover:text-gray-700">
+                          {/* Story Content */}
+                          <div className="w-full space-y-4">
+                            {/* Title & Category */}
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                              <h2 className="text-xl font-bold text-gray-800 hover:text-gray-700">
                                 {item?.title}
                               </h2>
-
-                              <p className="text-gray-600 title5 font-bold line-clamp-3">
+                              <span className="text-sm font-medium text-gray-500">
                                 ({item?.category?.name})
-                              </p>
+                              </span>
                             </div>
-                            <p className="text-gray-600 line-clamp-3">
+
+                            {/* Description */}
+                            <p className="text-gray-600 text-sm line-clamp-3">
                               {item?.description}
                             </p>
-                            <div className="flex lg:gap-0 gap-4  lg:flex-row flex-col justify-between lg:items-center pt-2">
+
+                            {/* Footer: Author Info & Read More */}
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 pt-2 border-t border-gray-200 mt-2">
+                              {/* Author Info */}
                               <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-full overflow-hidden">
                                   <img
@@ -189,24 +186,26 @@ const Home = () => {
                                     }
                                     alt="user"
                                     onError={(e) => {
-                                      e.target.onerror = null; // Prevents infinite loop
-                                      e.target.src = "/fallback-user.png"; // Secondary fallback
+                                      e.target.onerror = null;
+                                      e.target.src = "/fallback-user.png";
                                     }}
-                                  />{" "}
+                                  />
                                 </div>
                                 <div>
-                                  <span className="font-semibold block">
+                                  <span className="font-semibold text-gray-800 block">
                                     {item?.user?.firstname}{" "}
                                     {item?.user?.lastname}
                                   </span>
-                                  <span className="text-sm text-gray-500">
+                                  <span className="text-xs text-gray-500">
                                     2 hours ago
                                   </span>
                                 </div>
                               </div>
+
+                              {/* Read More Button */}
                               <Link
                                 to={`/stories/${item?._id}`}
-                                className="flex lg:justify-center justify-end  items-center gap-2 px-0 lg:px-4 py-2 bg-transparent lg:bg-black text-black lg:text-white rounded-lg hover:bg-gray-800 transition duration-200"
+                                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-black rounded-md hover:bg-gray-800 transition"
                               >
                                 Read More
                                 <ChevronRight className="w-4 h-4" />
@@ -243,49 +242,60 @@ const Home = () => {
               )}
 
               {/* Trending Section */}
-              <div className="bg-white p-6 rounded-2xl shadow-sm">
+              <div className="bg-white p-4 rounded-2xl shadow-sm">
+                {/* Heading */}
                 <div className="flex items-center gap-2 mb-6">
-                  <TrendingUp className="w-5 h-5" />
-                  <h3 className="text-xl font-bold">Trending</h3>
+                  <TrendingUp className="w-5 h-5 text-gray-700" />
+                  <h3 className="text-xl font-bold text-gray-800">Trending</h3>
                 </div>
-                <div className="space-y-4">
+
+                {/* Trending Stories List */}
+                <div className="space-y-2">
                   {React.Children.toArray(
                     stories?.map((item) => (
                       <Link
                         to={`/stories/${item?._id}`}
-                        key={item?.id}
-                        className="flex gap-4 p-4 rounded-xl hover:bg-gray-50 transition duration-200 cursor-pointer"
+                        key={item?._id}
+                        className="flex gap-4 p-2 rounded-xl hover:bg-gray-50 transition duration-200"
                       >
-                        {/* <div className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
-                        <img
-                          className="w-full h-full object-cover"
-                          src="https://images.pexels.com/photos/3770357/pexels-photo-3770357.jpeg?auto=compress&cs=tinysrgb&w=600"
-                          alt={item?.title}
-                        />
-                      </div> */}
-                        <div className="w-full ">
-                          <div className=" gap-4 flex items-center justify-between">
-                            <p className="title5 font-semibold line-clamp-2">
+                        {/* Optional Thumbnail — Uncomment if needed */}
+                        {/* 
+          <div className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+            <img
+              className="w-full h-full object-cover"
+              src={item?.thumbnail || fallbackImage}
+              alt={item?.title}
+            />
+          </div> 
+          */}
+
+                        {/* Content */}
+                        <div className="flex-1">
+                          {/* Title & Category */}
+                          <div className="flex justify-between items-start gap-4">
+                            <p className="text-base font-semibold text-gray-800 line-clamp-2">
                               {item?.title}
                             </p>
-                            <p className="title5 font-semibold line-clamp-2">
+                            <span className="text-sm font-medium text-gray-500 whitespace-nowrap">
                               ({item?.category?.name})
-                            </p>
+                            </span>
                           </div>
-                          <div className="flex items-center gap-2 mt-2">
-                            <div className="w-10 h-10 rounded-full overflow-hidden">
+
+                          {/* Author Info */}
+                          <div className="flex items-center gap-3 mt-3">
+                            <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-100">
                               <img
                                 className="w-full h-full object-cover"
                                 src={
                                   item?.user?.profile_pic ||
                                   "/assets/images/fallback-user.svg"
                                 }
-                                alt="user"
+                                alt="Author"
                                 onError={(e) => {
-                                  e.target.onerror = null; // Prevents infinite loop
-                                  e.target.src = "/fallback-user.png"; // Secondary fallback
+                                  e.target.onerror = null;
+                                  e.target.src = "/fallback-user.png";
                                 }}
-                              />{" "}
+                              />
                             </div>
                             <span className="text-sm text-gray-600">
                               {item?.user?.firstname} {item?.user?.lastname}
@@ -309,7 +319,7 @@ const Home = () => {
                     users?.map((item) => (
                       <div
                         key={item?._id}
-                        className="flex items-center justify-between p-4 rounded-xl hover:bg-gray-50 transition duration-200"
+                        className="flex items-center justify-between p-2 rounded-xl hover:bg-gray-50 transition duration-200"
                       >
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-full overflow-hidden">
