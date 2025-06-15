@@ -9,11 +9,13 @@ const SelectDropdown = ({
   placeholder = "Select an option",
   className = "",
   error = "",
+  required,
 }) => {
   return (
     <div className="relative w-full">
       <select
         name={name}
+        required={required}
         value={value}
         onChange={onChange}
         className={`bg-transparent border text-black w-full py-3 border-slate-600 ${

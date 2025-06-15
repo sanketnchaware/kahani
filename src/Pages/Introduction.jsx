@@ -105,51 +105,55 @@ const Introduction = () => {
       <section className="default_section py-24">
         <div className="space-y-8 w-11/12 m-auto">
           <h4 className="">Best Stories For Today</h4>
-          <div className=" grid gtid-cols-1 lg:grid-cols-4 gap-6">
+          <div className=" grid gtid-cols-1 lg:grid-cols-3 gap-6">
             {React.Children.toArray(
-              stories?.map(({ title, category, description, user, _id }) => {
-                return (
-                  <div className="rounded-lg shadow-sameshadow hover:shadow-lg transition-shadow duration-300 bg-white">
-                    <div className="p-4 space-y-3">
-                      {/* Story Title */}
-                      <div className="flex justify-between items-center">
-                        <h3 className="body1b text-lg font-semibold text-gray-800">
-                          {title}{" "}
-                        </h3>
-                        <p className="text-xs">( {category?.name} )</p>
-                      </div>
+              stories
+                ?.slice(0, 8)
+                ?.map(({ title, category, description, user, _id, index }) => {
+                  return (
+                    <div className="rounded-lg shadow-sameshadow hover:shadow-lg transition-shadow duration-300 bg-white">
+                      <div className="p-4 space-y-3">
+                        {/* Story Title */}
+                        <div className="flex justify-between items-center">
+                          <h3 className="body2b text-lg font-semibold text-gray-800">
+                            {title}{" "}
+                          </h3>
+                          <p className="text-xs">( {category?.name} )</p>
+                        </div>
 
-                      {/* Short Description */}
-                      <p className="text-sm text-gray-600 line-clamp-2">
-                        {description}
-                      </p>
+                        {/* Short Description */}
+                        <p className="text-sm text-gray-600 line-clamp-2">
+                          {description}
+                        </p>
 
-                      {/* Author & Read More */}
-                      <div className="flex items-center justify-between pt-2 border-t border-gray-200 mt-2">
-                        <span className="text-xs text-gray-500 font-medium">
-                          By {user?.firstname} {user?.lastname}
-                        </span>
+                        {/* Author & Read More */}
+                        <div className="flex items-center justify-between pt-2 border-t border-gray-200 mt-2">
+                          <span className="text-xs text-gray-500 font-medium">
+                            By {user?.firstname} {user?.lastname}
+                          </span>
 
-                        <Link
-                          to={`/stories/${_id}`}
-                          className="text-xs font-semibold text-primary hover:underline transition-all"
-                        >
-                          Read full story →
-                        </Link>
+                          <Link
+                            to={`/stories/${_id}`}
+                            className="text-xs font-semibold text-primary hover:underline transition-all"
+                          >
+                            Read full story →
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
+                  );
+                })
             )}
             {/* <img className=" m-auto" src={hero_logo} alt="hero_logo" /> */}
           </div>
 
-          <Link to="/stories" className="block  w-fit">
-            <CommonButton styles="w-fit text-md" size="md">
-              Read All Stories
-            </CommonButton>
-          </Link>
+          <div className="flex justify-end items-center">
+            <Link to="/stories" className="block  w-fit">
+              <CommonButton styles="w-fit text-md" size="md">
+                Read All Stories
+              </CommonButton>
+            </Link>
+          </div>
         </div>
       </section>
 

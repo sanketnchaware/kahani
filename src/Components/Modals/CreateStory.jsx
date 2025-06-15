@@ -25,8 +25,6 @@ const CreateStory = ({
   const dispatch = useDispatch();
   const { loading, setLoading } = useContext(LoaderContext);
 
- 
-
   const handleTagChange = (e) => {
     const input = e.target.value;
     if (input.includes(",")) {
@@ -80,7 +78,10 @@ const CreateStory = ({
       onClick={(e) => e.target === e.currentTarget && toggleOpen()}
     >
       {open && (
-        <div className="bg-white  rounded-2xl shadow-xl w-11/12 max-w-4xl max-h-[90vh] overflow-hidden">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white  rounded-2xl shadow-xl w-11/12 max-w-4xl max-h-[90vh] overflow-hidden"
+        >
           <div className="p-6">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
@@ -109,6 +110,7 @@ const CreateStory = ({
                   Title
                 </label>
                 <TextInput
+                  required={true}
                   type="text"
                   name="title"
                   placeholder="Enter an engaging title for your story..."
@@ -159,6 +161,7 @@ const CreateStory = ({
                   </label>
                   <SelectDropdown
                     showvalue="_id"
+                    required={true}
                     name="category"
                     value={params.category}
                     onChange={handleChange}
@@ -207,14 +210,14 @@ const CreateStory = ({
               </button>
               <CommonButton
                 size="lg"
-                onClick={handleSubmit}
+                type="submit"
                 className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
               >
                 {storyId ? "Update" : "Post"} Story
               </CommonButton>
             </div>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

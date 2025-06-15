@@ -11,6 +11,7 @@ import CommonButton from "../Components/Common/CommonButton";
 import { fetchUsers } from "../features/users";
 import LoaderContext from "../Context/loaderContext";
 import CommonTabs from "../Components/Common/CommonTabs";
+import Pagination from "../Components/Common/Pagination";
 
 const Home = () => {
   const { stories } = useSelector((state) => state.stories);
@@ -26,7 +27,6 @@ const Home = () => {
   const query = new URLSearchParams(location.search);
 
   const category = query.get("cat") || "all";
-  console.log("category:", category);
 
   const { setLoading } = useContext(LoaderContext);
 
@@ -35,7 +35,6 @@ const Home = () => {
   const main = useRef(null);
 
   const { categories } = useSelector((state) => state.dropdown);
-  console.log("categories:", categories);
 
   const [openCreateStory, setCreateOpenStory] = useState(false);
 
@@ -45,6 +44,11 @@ const Home = () => {
 
   const [debounceValue, setDebounceValue] = useState("");
 
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const storiesPerPage = 4;
+
+  // ✅ Step 1: Filter stories first
   const filteredStories = stories.filter((story) => {
     const matchesCategory =
       category === "all" || story?.category?.slug === category;
@@ -56,6 +60,22 @@ const Home = () => {
 
     return matchesCategory && matchesSearch;
   });
+
+  // Calculate totalPages AFTER filtering
+  const totalPages = Math.ceil(filteredStories.length / storiesPerPage);
+
+  //Clamp currentPage if it's greater than totalPages
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    }
+  }, [filteredStories, totalPages]);
+
+  // Apply pagination AFTER filtering
+  const paginatedStories = filteredStories.slice(
+    (currentPage - 1) * storiesPerPage,
+    currentPage * storiesPerPage
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -147,12 +167,12 @@ const Home = () => {
               <CommonTabs urlQuery={category} tabOptions={categories} />
 
               {/* Stories List */}
-              {filteredStories?.length > 0 ? (
+              {paginatedStories?.length > 0 ? (
                 <div className="space-y-6">
                   {React.Children.toArray(
-                    filteredStories.map((item) => (
+                    paginatedStories?.map((item) => (
                       <div
-                        key={item?.id}
+                        key={item?._id}
                         className="w-full bg-white p-4 md:p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-200"
                       >
                         <div className="flex flex-col md:flex-row gap-6">
@@ -222,6 +242,12 @@ const Home = () => {
                   <p className="text-gray-500 text-lg">No Stories Found!</p>
                 </div>
               )}
+
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
             </div>
 
             {/* Sidebar */}
@@ -346,9 +372,9 @@ const Home = () => {
                           </span> */}
                           </div>
                         </div>
-                        <button className="px-4 py-2 bg-black text-white text-sm rounded-lg hover:bg-gray-800 transition duration-200">
+                        {/* <button className="px-4 py-2 bg-black text-white text-sm rounded-lg hover:bg-gray-800 transition duration-200">
                           Follow
-                        </button>
+                        </button> */}
                       </div>
                     ))
                   )}

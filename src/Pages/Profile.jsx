@@ -175,13 +175,13 @@ const Profile = () => {
           {stories?.length > 0 ? (
             <div className=" space-y-2">
               {React.Children.toArray(
-                stories?.map((item, index) => (
+                stories?.map((item) => (
                   <div
-                    key={item.id}
+                    key={item._id}
                     className="space-y-2 shadow-sameshadow text-black rounded-xl px-3 py-2"
                   >
                     <div className="flex justify-between">
-                      <p className="body3b">
+                      <p className="body3">
                         <span className="">{item?.title}</span>
                       </p>
                       <p className=" flex items-center caption  px-3 ">
@@ -281,7 +281,7 @@ const Profile = () => {
           <p className="title4 text-center w-full pt-6 ">My profile</p>
           <form
             action=""
-            className="  h-full w-full flex  flex-col items-center "
+            className="shadow-sameshadow  rounded-xl w-full flex space-y-4 flex-col items-center "
           >
             {" "}
             <div className="mt-4 w-28 h-28 relative rounded-full border overflow-hidden group">
@@ -311,11 +311,30 @@ const Profile = () => {
                 <Edit className="w-6 h-6" />
               </label>
             </div>
-            <p className="body2 mt-4 text-center w-full ">
+            <div className="w-full  space-y-4  rounded-xl p-4">
+              {React.Children.toArray(
+                [
+                  {
+                    name: "Name",
+                    value: `${user?.firstname} ${user?.lastname}`,
+                  },
+                  { name: "Email", value: user?.email },
+                  { name: "Phone", value: user?.phone },
+                ].map(({ name, value }) => {
+                  return (
+                    <div className="flex gap-4 items-center justify-between">
+                      <p>{name}:</p>
+                      <p>{value}</p>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+            {/* <p className="body2 mt-4 text-center w-full ">
               {user?.firstname} {user?.lastname}
             </p>
             <p className="body4b">{user?.email}</p>
-            <p className="body4b">{user?.phone}</p>
+            <p className="body4b">{user?.phone}</p> */}
           </form>
         </section>
       </div>

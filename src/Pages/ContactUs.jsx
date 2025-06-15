@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Send, Mail, Phone, MapPin } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { showToastMessage } from "../utils/helpers";
 const ContactForm = () => {
   const service_id = import.meta.env.VITE_SERVICE_ID;
   const template_id = import.meta.env.VITE_TEMPLATE_ID;
@@ -24,7 +25,9 @@ const ContactForm = () => {
     emailjs.sendForm(service_id, template_id, form.current, public_key).then(
       (result) => {
         console.log("Message sent:", result.text);
-        alert("Message sent successfully!");
+        showToastMessage(
+          "Thank you for contacting us ! We will get back to you in 48 hours !"
+        );
         setParams({
           name: "",
           email: "",
