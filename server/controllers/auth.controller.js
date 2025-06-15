@@ -35,11 +35,12 @@ router.post("/login", async (req, res) => {
 
     return res.status(200).send({
       user: {
-        id: user?._id,
+        _id: user?._id,
         firstname: user?.firstname,
         lastname: user?.lastname,
         phone: user?.phone,
         email: user?.email,
+        profile_pic: user?.profile_pic,
       },
       token,
       message: "Logged in successfully!",

@@ -180,11 +180,20 @@ const Home = () => {
                             </p>
                             <div className="flex lg:gap-0 gap-4  lg:flex-row flex-col justify-between lg:items-center pt-2">
                               <div className="flex items-center gap-3">
-                                <img
-                                  className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-                                  src="https://images.pexels.com/photos/3770357/pexels-photo-3770357.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                  alt="author"
-                                />
+                                <div className="w-10 h-10 rounded-full overflow-hidden">
+                                  <img
+                                    className="w-full h-full object-cover"
+                                    src={
+                                      item?.user?.profile_pic ||
+                                      "/assets/images/fallback-user.svg"
+                                    }
+                                    alt="user"
+                                    onError={(e) => {
+                                      e.target.onerror = null; // Prevents infinite loop
+                                      e.target.src = "/fallback-user.png"; // Secondary fallback
+                                    }}
+                                  />{" "}
+                                </div>
                                 <div>
                                   <span className="font-semibold block">
                                     {item?.user?.firstname}{" "}
@@ -264,11 +273,20 @@ const Home = () => {
                             </p>
                           </div>
                           <div className="flex items-center gap-2 mt-2">
-                            <img
-                              className="w-6 h-6 rounded-full"
-                              src="https://images.pexels.com/photos/3770357/pexels-photo-3770357.jpeg?auto=compress&cs=tinysrgb&w=600"
-                              alt="author"
-                            />
+                            <div className="w-10 h-10 rounded-full overflow-hidden">
+                              <img
+                                className="w-full h-full object-cover"
+                                src={
+                                  item?.user?.profile_pic ||
+                                  "/assets/images/fallback-user.svg"
+                                }
+                                alt="user"
+                                onError={(e) => {
+                                  e.target.onerror = null; // Prevents infinite loop
+                                  e.target.src = "/fallback-user.png"; // Secondary fallback
+                                }}
+                              />{" "}
+                            </div>
                             <span className="text-sm text-gray-600">
                               {item?.user?.firstname} {item?.user?.lastname}
                             </span>
@@ -290,15 +308,24 @@ const Home = () => {
                   {React.Children.toArray(
                     users?.map((item) => (
                       <div
-                        key={item?.id}
+                        key={item?._id}
                         className="flex items-center justify-between p-4 rounded-xl hover:bg-gray-50 transition duration-200"
                       >
                         <div className="flex items-center gap-3">
-                          <img
-                            className="w-10 h-10 rounded-full"
-                            src="https://images.pexels.com/photos/3770357/pexels-photo-3770357.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt="user"
-                          />
+                          <div className="w-10 h-10 rounded-full overflow-hidden">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={
+                                item?.profile_pic ||
+                                "/assets/images/fallback-user.svg"
+                              }
+                              alt="user"
+                              onError={(e) => {
+                                e.target.onerror = null; // Prevents infinite loop
+                                e.target.src = "/fallback-user.png"; // Secondary fallback
+                              }}
+                            />
+                          </div>
                           <div>
                             <span className="font-semibold block">
                               {item?.firstname} {item?.lastname}

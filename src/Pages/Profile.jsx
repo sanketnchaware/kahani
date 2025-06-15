@@ -24,6 +24,8 @@ const Profile = () => {
 
   const {
     auth: { user },
+    auth,
+    setAuth,
   } = useContext(UserContext);
   console.log("user:", user);
 
@@ -36,6 +38,7 @@ const Profile = () => {
   const { stories } = useSelector((state) => state.stories);
 
   const [storiesById, setStoriesById] = useState([]);
+  console.log("storiesById:", storiesById);
   const [storyId, SetStoryId] = useState("");
 
   const toggleStoryModal = () => {
@@ -76,10 +79,11 @@ const Profile = () => {
       );
 
       await axiosInstance
-        .put(`/users/${user?.id}`, {
+        .put(`/users/${user?._id}`, {
           profile_pic: res.data.secure_url,
         })
         .then((response) => {
+          setAuth({ ...auth, user: response.data.data });
           console.log("response:", response);
         })
         .catch((error) => {
@@ -98,7 +102,7 @@ const Profile = () => {
   function GetStoriesByUserId() {
     setLoading(true);
     axiosInstance
-      .get(`/stories/user/${user?.id}`)
+      .get(`/stories/user/${user?._id}`)
       .then((res) => {
         setStoriesById(res.data.stories);
       })
@@ -150,8 +154,8 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (user?.id) GetStoriesByUserId();
-  }, [user?.id]);
+    if (user?._id) GetStoriesByUserId();
+  }, [user?._id]);
 
   useEffect(() => {
     if (!token) {
@@ -279,28 +283,32 @@ const Profile = () => {
             className="  h-full w-full flex  flex-col items-center "
           >
             {" "}
-            <div className="mt-4 w-28 h-28 rounded-full border   overflow-hidden">
-              {user?.profile_pic ? (
-                <img
-                  className="w-full h-full object-cover"
-                  src={user?.profile_pic}
-                  alt=""
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <input
-                    onChange={handleProfilePicChange}
-                    className=" hidden debug w-full"
-                    type="file"
-                    name="profile_pic"
-                    id="profile_pic"
-                  />
+            <div className="mt-4 w-28 h-28 relative rounded-full border overflow-hidden group">
+              <img
+                className="w-full h-full object-cover"
+                src={user?.profile_pic || "/assets/images/fallback-user.svg"}
+                alt="user"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/fallback-user.png";
+                }}
+              />
 
-                  <label htmlFor="profile_pic" style={{ cursor: "pointer" }}>
-                    <Edit />
-                  </label>
-                </div>
-              )}
+              <input
+                onChange={handleProfilePicChange}
+                className="hidden"
+                type="file"
+                name="profile_pic"
+                id="profile_pic"
+              />
+
+              {/* Edit overlay */}
+              <label
+                htmlFor="profile_pic"
+                className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white cursor-pointer transition-opacity"
+              >
+                <Edit className="w-6 h-6" />
+              </label>
             </div>
             <p className="body2 mt-4 text-center w-full ">
               {user?.firstname} {user?.lastname}
