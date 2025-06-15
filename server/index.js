@@ -3,6 +3,7 @@ const Storycontroller = require("./controllers/story.controller");
 const UserController = require("./controllers/user.controller");
 const AuthController = require("./controllers/auth.controller");
 const CategoryController = require("./controllers/category.controller");
+const SubscribeController = require("./controllers/subscriber.controller");
 
 const cors = require("cors");
 const connect = require("./configs/db");
@@ -32,6 +33,7 @@ app.use("/stories", Storycontroller);
 app.use("/users", UserController);
 app.use("/auth", AuthController);
 app.use("/categories", CategoryController);
+app.use("/subcribe", SubscribeController);
 
 // Catch-all for undefined routes (should be at the end of your route definitions)
 app.all("*", (req, res) => {

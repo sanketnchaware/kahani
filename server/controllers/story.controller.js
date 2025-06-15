@@ -1,5 +1,5 @@
 const express = require("express");
-const Story = require("../modals/story.model.js");
+const Story = require("../models/story.model.js");
 const router = express.Router();
 
 // GET: List all stories

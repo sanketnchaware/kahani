@@ -5,29 +5,6 @@ import { Link } from "react-router-dom";
 import TextInput from "../Components/Common/TextInput";
 import UserContext from "../Context/userContext";
 
-const storyCategories = [
-  "Adventure",
-  "Comedy",
-  "Drama",
-  "Fantasy",
-  "Historical Fiction",
-  "Horror",
-  "Mystery",
-  "Romance",
-  "Science Fiction",
-  "Thriller",
-  "Western",
-  "Dystopian",
-  "Magical Realism",
-  "Realist",
-  "Satire",
-  "Tragedy",
-  "Mythology",
-  "Folklore",
-  "Fairy Tale",
-  "Parable",
-];
-
 const Introduction = () => {
   const { stories } = useSelector((state) => state.stories);
   const {
@@ -36,8 +13,6 @@ const Introduction = () => {
 
   const { categories } = useSelector((state) => state.dropdown);
   console.log("categories:", categories);
-
-  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
 
@@ -168,16 +143,16 @@ const Introduction = () => {
         </div>
         <div className="w-11/12 m-auto lg:w-auto">
           <div className=" space-y-2">
-            <p className="title2">Subscribe</p>
+            <p className="title2"> Stay in the Loop!</p>
 
             <p className="body2">
-              Subscribe to our newsletter and get upto 40% off on our exclusive
-              service.
+              Subscribe to our newsletter and be the first to know about new
+              stories, platform updates, and exclusive content from Kahani.
             </p>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                alert("Subscribe to our newsletter");
+                alert("Subscribed !");
               }}
               className="space-y-6"
             >
