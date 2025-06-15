@@ -1,25 +1,44 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Send, Mail, Phone, MapPin } from "lucide-react";
-
+import emailjs from "@emailjs/browser";
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
+  const service_id = import.meta.env.VITE_SERVICE_ID;
+  const template_id = import.meta.env.VITE_TEMPLATE_ID;
+  const public_key = import.meta.env.VITE_PUBLIC_KEY;
+
+  console.log("public_key:", public_key);
+
+  const [params, setParams] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    ("Form submitted:", formData);
-  };
+  const form = useRef();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setParams({ ...params, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(service_id, template_id, form.current, public_key).then(
+      (result) => {
+        console.log("Message sent:", result.text);
+        alert("Message sent successfully!");
+        setParams({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      },
+      (error) => {
+        console.log("Error:", error);
+        alert("Failed to send message.");
+      }
+    );
   };
 
   return (
@@ -71,7 +90,7 @@ const ContactForm = () => {
             <h2 className="text-2xl font-bold text-center mb-8">
               Send us a Message
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={form} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -80,9 +99,9 @@ const ContactForm = () => {
                   <input
                     type="text"
                     name="name"
-                    value={formData.name}
+                    value={params.name}
                     onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
+                    className="w-full p-3 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                     required
                   />
                 </div>
@@ -93,9 +112,9 @@ const ContactForm = () => {
                   <input
                     type="email"
                     name="email"
-                    value={formData.email}
+                    value={params.email}
                     onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
+                    className="w-full p-3 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                     required
                   />
                 </div>
@@ -108,9 +127,9 @@ const ContactForm = () => {
                 <input
                   type="text"
                   name="subject"
-                  value={formData.subject}
+                  value={params.subject}
                   onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
+                  className="w-full p-3 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                   required
                 />
               </div>
@@ -121,10 +140,10 @@ const ContactForm = () => {
                 </label>
                 <textarea
                   name="message"
-                  value={formData.message}
+                  value={params.message}
                   onChange={handleChange}
                   rows={6}
-                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
+                  className="w-full p-3 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
                   required
                 ></textarea>
               </div>
