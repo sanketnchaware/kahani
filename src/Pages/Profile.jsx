@@ -13,12 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchStories } from "../features/stories";
 import LoaderContext from "../Context/loaderContext";
 import { Edit } from "lucide-react";
-import ImageUploader from "../Components/Common/ImageUploader";
+
 import axios from "axios";
 
 const Profile = () => {
   const navigate = useNavigate();
 
+  const cloud_name = import.meta.env.VITE_CLOUD_NAME;
   const dispatch = useDispatch();
   gsap.registerPlugin(ScrollTrigger);
 
@@ -74,7 +75,7 @@ const Profile = () => {
 
     try {
       const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/kahani/image/upload",
+        `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
         formData
       );
 

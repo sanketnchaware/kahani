@@ -6,8 +6,6 @@ const ContactForm = () => {
   const template_id = import.meta.env.VITE_TEMPLATE_ID;
   const public_key = import.meta.env.VITE_PUBLIC_KEY;
 
-  console.log("public_key:", public_key);
-
   const [params, setParams] = useState({
     name: "",
     email: "",
