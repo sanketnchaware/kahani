@@ -44,7 +44,7 @@ const Navbar = () => {
 
   return (
     <div className="sm:flex hidden fixed z-50 top-0 left-0 w-full bg-white shadow-md  items-center justify-between py-3 px-10">
-      <Link to="/">Kahani.com</Link>
+      <Link to="/">Kahani</Link>
 
       <div className="flex items-center gap-4">
         {[

@@ -43,14 +43,27 @@ const Introduction = () => {
 
   return (
     <div className="divide-y-2">
-      <section className="default_section bg-black text-white ">
-        <div className="w-11/12 m-auto space-y-6">
-          {/* <img className="h-[50vh] m-auto" src={welcome} alt="hero_logo" /> */}
+      <section className="flex justify-between gap-4 lg:flex-row flex-col-reverse items-center default_section bg-black text-white">
+        <div className="w-11/12 lg:w-7/12 space-y-6">
+          <h1 className="text-center lg:text-start title1">
+            Hey {user?.firstname}! Ready to Share Your Story?
+          </h1>
+          <p className="title4 text-center lg:text-start text-gray-300">
+            Discover, read, and write stories that touch the heart. <br />
+            <span className="text-yellow-400 font-semibold">Kahani</span> is
+            your space to create, connect, and inspire.
+          </p>
+          <p className="title5 text-center lg:text-start text-gray-400">
+            Start your journey today — because every story deserves to be heard.
+          </p>
+        </div>
 
-          <h4 className="text-center w-full">
-            Hey {user?.firstname}, Welcome to Kahani.com !
-          </h4>
-          <p className="title2 text-center w-full">A Home for Every Story.</p>
+        <div className=" w-6/12 lg:w-4/12  ">
+          <img
+            src="/assets/images/book-writer.svg"
+            alt="hero_image"
+            className="w-full h-auto grayscale contrast-125"
+          />
         </div>
       </section>
 
