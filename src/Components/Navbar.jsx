@@ -8,9 +8,7 @@ import LoaderContext from "../Context/loaderContext";
 
 const Navbar = () => {
   const { pathname } = useLocation();
-  const {
-    auth: { isAuthenticated, user },
-  } = useContext(UserContext);
+  const { user, token ,isAuthenticated} = useContext(UserContext);
 
   const { setLoading } = useContext(LoaderContext);
 
@@ -24,18 +22,30 @@ const Navbar = () => {
     setProfileOptions(false);
   };
 
+  const { setAuth } = useContext(UserContext);
+
   const handleLogout = () => {
     setLoading(true);
     axiosInstance
       .post("/auth/logout")
       .then((response) => {
-        showToastMessage(response?.data?.message);
-        localStorage.removeItem("authToken");
+        showToastMessage(
+          response?.data?.message || "Logged out successfully",
+          "success"
+        );
+
+        // ✅ Clear localStorage
+        localStorage.removeItem("token");
         localStorage.removeItem("user");
-        window.location.reload();
+
+        // ✅ Reset context state
+
+        // ✅ Redirect or refresh
+        window.location.href = "/login"; // more semantic than reload
       })
       .catch((error) => {
         console.log(error);
+        showToastMessage("Logout failed", "error");
       })
       .finally(() => {
         setLoading(false);
@@ -52,7 +62,7 @@ const Navbar = () => {
           { name: "About", url: "/about-us" },
           { name: "Stories", url: "/stories" },
           { name: "Contact", url: "/contact-us" },
-          !isAuthenticated ? { name: "Login", url: "/login" } : null,
+          // !isAuthenticated ? { name: "Login", url: "/login" } : null,
         ]
           .filter(Boolean)
           .map((item) => (

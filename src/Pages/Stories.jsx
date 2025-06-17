@@ -12,15 +12,14 @@ import { fetchUsers } from "../features/users";
 import LoaderContext from "../Context/loaderContext";
 import CommonTabs from "../Components/Common/CommonTabs";
 import Pagination from "../Components/Common/Pagination";
+import moment from "moment/moment";
 
 const Home = () => {
   const { stories } = useSelector((state) => state.stories);
 
   const { users } = useSelector((state) => state.users);
 
-  const {
-    auth: { user, isAuthenticated },
-  } = useContext(UserContext);
+  const { user, isAuthenticated } = useContext(UserContext);
 
   const location = useLocation();
 
@@ -200,15 +199,8 @@ const Home = () => {
                                 <div className="w-10 h-10 rounded-full overflow-hidden">
                                   <img
                                     className="w-full h-full object-cover"
-                                    src={
-                                      item?.user?.profile_pic ||
-                                      "/assets/images/fallback-user.svg"
-                                    }
+                                    src={item?.user?.profile_pic}
                                     alt="user"
-                                    onError={(e) => {
-                                      e.target.onerror = null;
-                                      e.target.src = "/fallback-user.png";
-                                    }}
                                   />
                                 </div>
                                 <div>
@@ -216,8 +208,13 @@ const Home = () => {
                                     {item?.user?.firstname}{" "}
                                     {item?.user?.lastname}
                                   </span>
-                                  <span className="text-xs text-gray-500">
-                                    2 hours ago
+                                  <span
+                                    title={moment(item?.createdAt).format(
+                                      "MMMM Do YYYY, h:mm:ss a"
+                                    )}
+                                    className="text-xs text-gray-400"
+                                  >
+                                    {moment(item?.createdAt).fromNow()}
                                   </span>
                                 </div>
                               </div>
@@ -312,15 +309,8 @@ const Home = () => {
                             <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-100">
                               <img
                                 className="w-full h-full object-cover"
-                                src={
-                                  item?.user?.profile_pic ||
-                                  "/assets/images/fallback-user.svg"
-                                }
+                                src={item?.user?.profile_pic}
                                 alt="Author"
-                                onError={(e) => {
-                                  e.target.onerror = null;
-                                  e.target.src = "/fallback-user.png";
-                                }}
                               />
                             </div>
                             <span className="text-sm text-gray-600">
@@ -351,15 +341,8 @@ const Home = () => {
                           <div className="w-10 h-10 rounded-full overflow-hidden">
                             <img
                               className="w-full h-full object-cover"
-                              src={
-                                item?.profile_pic ||
-                                "/assets/images/fallback-user.svg"
-                              }
+                              src={item?.profile_pic}
                               alt="user"
-                              onError={(e) => {
-                                e.target.onerror = null; // Prevents infinite loop
-                                e.target.src = "/fallback-user.png"; // Secondary fallback
-                              }}
                             />
                           </div>
                           <div>

@@ -5,12 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import TextInput from "../Common/TextInput";
 import axiosInstance from "../../utils/axiosInstance";
 import { showToastMessage } from "../../utils/helpers";
-import UserContext from "../../Context/userContext";
+
 import LoaderContext from "../../Context/loaderContext";
 import { Eye, EyeOff } from "lucide-react";
+import UserContext from "../../Context/userContext";
 
 const Login = () => {
-  const { setAuth } = useContext(UserContext);
+  const { login } = useContext(UserContext);
 
   const { setLoading } = useContext(LoaderContext);
 
@@ -32,34 +33,26 @@ const Login = () => {
     window.open("http://localhost:3333/auth/google");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const { email, password } = params;
-    setLoading(true);
-    axiosInstance
-      .post("/auth/login", {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        localStorage.setItem("authToken", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        setAuth({
-          user: response.data.user,
-          token: response.data.token,
-          isAuthenticated: true,
-        });
-        showToastMessage(response?.data?.message, "success");
-        navigate("/");
-      })
-      .catch((error) => {
-        "error:", error;
-        showToastMessage(error?.response?.data?.message, "error");
-      })
-      .finally(() => {
-        setLoading(false);
+    try {
+      setLoading(true);
+      const res = await axiosInstance.post("/auth/login", {
+        email: params.email,
+        password: params.password,
       });
+      login(res.data.user, res.data.token);
+      showToastMessage(res.data.message, "success");
+      navigate("/");
+    } catch (error) {
+      console.error("Login Error:", error);
+      showToastMessage(
+        error?.response?.data?.message || "Login failed",
+        "error"
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

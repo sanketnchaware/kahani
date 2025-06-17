@@ -6,18 +6,16 @@ import Signup from "../Components/LoginPages/Signup";
 
 const Auth = () => {
   const { pathname } = useLocation();
-
   const navigate = useNavigate();
 
-  const {
-    auth: { isAuthenticated },
-  } = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
 
+  // ✅ Redirect to home only after loading is complete
   useEffect(() => {
-    if (isAuthenticated) {
+    if (token) {
       navigate("/");
     }
-  }, [isAuthenticated]);
+  }, [token]);
 
   return <>{pathname === "/login" ? <Login /> : <Signup />}</>;
 };

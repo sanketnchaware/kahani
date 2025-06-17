@@ -1,11 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Send, Mail, Phone, MapPin } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { showToastMessage } from "../utils/helpers";
+import LoaderContext from "../Context/loaderContext";
 const ContactForm = () => {
   const service_id = import.meta.env.VITE_SERVICE_ID;
   const template_id = import.meta.env.VITE_TEMPLATE_ID;
   const public_key = import.meta.env.VITE_PUBLIC_KEY;
+
+  const { loading, setLoading } = useContext(LoaderContext);
 
   const [params, setParams] = useState({
     name: "",
@@ -22,24 +25,31 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm(service_id, template_id, form.current, public_key).then(
-      (result) => {
-        console.log("Message sent:", result.text);
-        showToastMessage(
-          "Thank you for contacting us ! We will get back to you in 48 hours !"
-        );
-        setParams({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-        });
-      },
-      (error) => {
-        console.log("Error:", error);
-        alert("Failed to send message.");
-      }
-    );
+    setLoading(true);
+    emailjs
+      .sendForm(service_id, template_id, form.current, public_key)
+      .then(
+        (result) => {
+          console.log("Message sent:", result.text);
+          showToastMessage(
+            "Thank you for contacting us ! We will get back to you in 48 hours !"
+          );
+
+          setParams({
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.log("Error:", error);
+          showToastMessage("Failed to send message.", "error");
+        }
+      )
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -59,9 +69,7 @@ const ContactForm = () => {
             <div className="p-6 flex flex-col items-center text-center">
               <Mail className="w-8 h-8 mb-4" />
               <p className=" title4 font-semibold mb-2">Email Us</p>
-              <p title4 className="text-gray-300">
-                sanketnchaware@gmail.com
-              </p>
+              <p className="text-gray-300">sanketnchaware@gmail.com</p>
             </div>
           </div>
 
@@ -69,9 +77,7 @@ const ContactForm = () => {
             <div className="p-6 flex flex-col items-center text-center">
               <Phone className="w-8 h-8 mb-4" />
               <p className=" title4 font-semibold mb-2">Call Us</p>
-              <p title4 className="text-gray-300">
-                +91 8378910529
-              </p>
+              <p className="text-gray-300">+91 8378910529</p>
             </div>
           </div>
 
@@ -79,7 +85,7 @@ const ContactForm = () => {
             <div className="p-6 flex flex-col items-center text-center">
               <MapPin className="w-8 h-8 mb-4" />
               <p className=" title4 font-semibold mb-2">Visit Us</p>
-              <p title4 className="text-gray-300">
+              <p className="text-gray-300">
                 Samarth Nagar, Near Tahasil Office, Risod, Maharashtra, India.
               </p>
             </div>

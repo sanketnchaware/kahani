@@ -7,9 +7,7 @@ import { showToastMessage } from "../../utils/helpers";
 
 const MobileSidebar = () => {
   const { pathname } = useLocation();
-  const {
-    auth: { isAuthenticated, user },
-  } = useContext(UserContext);
+  const { user, isAuthenticated } = useContext(UserContext);
 
   const [isOpen, setIsOpen] = useState(false);
   const [profileOptions, setProfileOptions] = useState(false);
@@ -21,20 +19,7 @@ const MobileSidebar = () => {
   const handleProfileOptions = () => {
     setProfileOptions((prev) => !prev);
   };
-
-  const handleLogout = () => {
-    axiosInstance
-      .post("/auth/logout")
-      .then((response) => {
-        showToastMessage(response?.data?.message);
-        localStorage.removeItem("authToken");
-        localStorage.removeItem("user");
-        window.location.reload();
-      })
-      .catch((error) => {
-        error;
-      });
-  };
+  const { logout } = useContext(UserContext);
 
   return (
     <div className="lg:hidden flex justify-between px-4 py-2 fixed z-50 w-full top-0 bg-white border items-center">
@@ -87,7 +72,7 @@ const MobileSidebar = () => {
               { name: "About", url: "/about-us" },
               { name: "Stories", url: "/stories" },
               { name: "Contact", url: "/contact-us" },
-              !isAuthenticated ? { name: "Login", url: "/login" } : null,
+              // !isAuthenticated ? { name: "Login", url: "/login" } : null,
             ]
               .filter(Boolean)
               .map((item) => (
@@ -137,10 +122,7 @@ const MobileSidebar = () => {
                       Profile
                     </Link>
                     <button
-                      onClick={() => {
-                        handleLogout();
-                        setIsOpen(false);
-                      }}
+                      onClick={logout}
                       className="w-full flex gap-2 items-center px-4 py-2 hover:bg-slate-50 rounded-md"
                     >
                       <img

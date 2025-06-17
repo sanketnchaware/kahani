@@ -24,6 +24,7 @@ export default {
         Onest: ["Onest"],
         libre: ["Libre Baskerville"],
         PlusJakartaSans: ["Plus Jakarta Sans"],
+        Montserrat: ["Montserrat", "sans-serif"],
       },
       colors: {
         nero: "#232323",

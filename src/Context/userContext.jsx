@@ -1,35 +1,33 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [auth, setAuth] = useState({
-    user: null,
-    token: null,
-    isAuthenticated: false,
+    user:
+      localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")),
+    token: localStorage.getItem("token"),
   });
+  const login = (user, token = null) => {
+    const currentToken = token || localStorage.getItem("token");
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (token && user) {
-      setAuth({ user, token, isAuthenticated: true });
-    } else {
-      setAuth({ user: null, token: null, isAuthenticated: false });
+    localStorage.setItem("user", JSON.stringify(user));
+    if (token) {
+      localStorage.setItem("token", token);
     }
-  }, []);
 
-  useEffect(() => {
-    if (auth?.user) {
-      localStorage.setItem("user", JSON.stringify(auth.user));
-    } else {
-      localStorage.removeItem("user");
-    }
-  }, [auth?.user]); // 🔄 Syncs `auth` to localStorage
+    setAuth({ user, token: currentToken });
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    setAuth({ user: null, token: null });
+  };
+
+  const isAuthenticated = !!(auth.user && auth.token);
 
   return (
-    <UserContext.Provider value={{ auth, setAuth }}>
+    <UserContext.Provider value={{ ...auth, isAuthenticated, login, logout }}>
       {children}
     </UserContext.Provider>
   );

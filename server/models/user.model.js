@@ -9,7 +9,12 @@ const UserSchema = new mongoose.Schema(
     },
     lastname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    phone: { type: Number, unique: true },
+    phone: {
+      type: Number,
+      unique: true,
+      sparse: true, // ✅ This line is important
+    },
+
     profile_pic: { type: String, required: false },
     password: { type: String, required: true },
   },
