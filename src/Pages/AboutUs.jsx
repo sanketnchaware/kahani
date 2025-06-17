@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import UserContext from "../Context/userContext";
 
 const AboutUs = () => {
-  const {
-    auth: { user, isAuthenticated },
-  } = useContext(UserContext);
+  const { user, isAuthenticated } = useContext(UserContext);
 
   return (
     <div className="min-h-screen mt-16 bg-white">
@@ -113,13 +111,13 @@ const AboutUs = () => {
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Start Sharing Your Story Today
-          </h2>
+          </h2> 
           <p className="text-lg mb-8">
             Join our community and let your voice be heard.
           </p>
           {!isAuthenticated ? (
             <Link to="/signup">
-              <CommonButton styles="w-fit invert" size="sm">
+              <CommonButton styles="w-fit m-auto invert" size="sm">
                 Sign up Now
               </CommonButton>
             </Link>

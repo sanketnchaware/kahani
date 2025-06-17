@@ -199,7 +199,10 @@ const Home = () => {
                                 <div className="w-10 h-10 rounded-full overflow-hidden">
                                   <img
                                     className="w-full h-full object-cover"
-                                    src={item?.user?.profile_pic}
+                                    src={
+                                      item?.user?.profile_pic ||
+                                      "/assets/images/fallback-user.svg"
+                                    }
                                     alt="user"
                                   />
                                 </div>
@@ -309,7 +312,10 @@ const Home = () => {
                             <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-100">
                               <img
                                 className="w-full h-full object-cover"
-                                src={item?.user?.profile_pic}
+                                src={
+                                  item?.user?.profile_pic ||
+                                  "/assets/images/fallback-user.svg"
+                                }
                                 alt="Author"
                               />
                             </div>
@@ -341,7 +347,10 @@ const Home = () => {
                           <div className="w-10 h-10 rounded-full overflow-hidden">
                             <img
                               className="w-full h-full object-cover"
-                              src={item?.profile_pic}
+                              src={
+                                item?.profile_pic ||
+                                "/assets/images/fallback-user.svg"
+                              }
                               alt="user"
                             />
                           </div>

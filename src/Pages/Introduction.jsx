@@ -9,10 +9,9 @@ import axiosInstance from "../utils/axiosInstance";
 
 const Introduction = () => {
   const { stories } = useSelector((state) => state.stories);
-  const { user, token } = useContext(UserContext);
+  const { user, isAuthenticated } = useContext(UserContext);
 
   const { categories } = useSelector((state) => state.dropdown);
-  console.log("categories:", categories);
 
   const [email, setEmail] = useState("");
 
@@ -60,7 +59,7 @@ const Introduction = () => {
           <p className="title4 text-center  text-gray-400">
             Start your journey today — because every story deserves to be heard.
           </p>
-          {!token ? (
+          {!isAuthenticated ? (
             <Link to="/signup" className="flex justify-center   w-full">
               <CommonButton styles="w-fit " size="md">
                 Create Account
@@ -69,7 +68,7 @@ const Introduction = () => {
           ) : (
             <Link to="/profile" className="flex justify-center   w-full">
               <CommonButton styles="w-fit " size="md">
-                Add Story
+                Write Your Story
               </CommonButton>
             </Link>
           )}

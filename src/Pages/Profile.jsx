@@ -198,10 +198,10 @@ const Profile = () => {
             <CommonButton
               onClick={() => setOpenCreateModal(true)}
               size="sm"
-              variant="secondary"
-              className="transition-all duration-300 hover:scale-105 hover:shadow-md"
+              variant="primary"
+              className="transition-all border px-4 py-2 rounded-xl duration-300 hover:scale-105 hover:shadow-md"
             >
-              ✍️ Write More Stories
+              ✍️ Write Your Story
             </CommonButton>
           </div>
 
@@ -281,7 +281,7 @@ const Profile = () => {
           >
             <div className="relative w-28 h-28 rounded-full overflow-hidden border group">
               <img
-                src={user?.profile_pic}
+                src={user?.profile_pic || "/assets/images/fallback-user.svg"}
                 alt="User"
                 className="w-full h-full object-cover"
               />
@@ -293,7 +293,9 @@ const Profile = () => {
               />
               <label
                 htmlFor="profile_pic"
-                className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white cursor-pointer"
+                className={` absolute inset-0 bg-black bg-opacity-40 opacity-0 ${
+                  editing ? " opacity-100 cursor-pointer" : "hidden"
+                }  flex items-center justify-center text-white `}
               >
                 <Edit className="w-6 h-6" />
               </label>
