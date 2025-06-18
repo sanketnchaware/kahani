@@ -99,12 +99,12 @@ const Login = () => {
           </CommonButton>
         </form>
 
-        <button
+        {/* <button
           onClick={handleLogin}
           className="w-full bg-white  font-semibold py-2 rounded border  hover:bg-blue-50 transition duration-200"
         >
           Sign in with Google
-        </button>
+        </button> */}
 
         <div className="mt-6 text-center">
           <p className="text-gray-500">or</p>
