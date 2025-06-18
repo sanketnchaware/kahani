@@ -8,7 +8,7 @@ import LoaderContext from "../Context/loaderContext";
 
 const Navbar = () => {
   const { pathname } = useLocation();
-  const { user, token ,isAuthenticated} = useContext(UserContext);
+  const { user, token, isAuthenticated } = useContext(UserContext);
 
   const { setLoading } = useContext(LoaderContext);
 
@@ -62,7 +62,7 @@ const Navbar = () => {
           { name: "About", url: "/about-us" },
           { name: "Stories", url: "/stories" },
           { name: "Contact", url: "/contact-us" },
-          // !isAuthenticated ? { name: "Login", url: "/login" } : null,
+          !isAuthenticated ? { name: "Login", url: "/login" } : null,
         ]
           .filter(Boolean)
           .map((item) => (
