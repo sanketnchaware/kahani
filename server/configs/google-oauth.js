@@ -8,13 +8,14 @@ dotenv.config();
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const google_callback_url = process.env.GOOGLE_CALLBACK_URL;
 
 passport.use(
   new GoogleStrategy(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3333/auth/google/callback",
+      callbackURL: google_callback_url,
     },
     async function (accessToken, refreshToken, profile, cb) {
       try {

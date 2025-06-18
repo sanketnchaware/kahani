@@ -16,6 +16,7 @@ const Login = () => {
   const { setLoading } = useContext(LoaderContext);
 
   const fields = { email: "", password: "" };
+  const baseURL = import.meta.env.VITE_BACKEND_URL;
 
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    window.open("http://localhost:3333/auth/google");
+    window.location.href = `${baseURL}/auth/google`;
   };
 
   const handleSubmit = async (e) => {

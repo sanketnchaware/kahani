@@ -14,6 +14,8 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3333;
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
+const fronted_url = process.env.FRONTEND_URL;
+console.log("fronted_url:", fronted_url);
 // Middleware setup
 app.use(express.json());
 
@@ -45,7 +47,7 @@ app.get(
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "/login",
+    failureRedirect: `${fronted_url}/login`,
     session: false,
   }),
   function (req, res) {
@@ -63,7 +65,7 @@ app.get(
     );
 
     res.redirect(
-      `http://localhost:3000/auth-success?token=${token}&user=${encodeURIComponent(
+      `${fronted_url}/auth-success?token=${token}&user=${encodeURIComponent(
         JSON.stringify(user)
       )}`
     );

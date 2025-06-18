@@ -72,7 +72,7 @@ const MobileSidebar = () => {
               { name: "About", url: "/about-us" },
               { name: "Stories", url: "/stories" },
               { name: "Contact", url: "/contact-us" },
-              // !isAuthenticated ? { name: "Login", url: "/login" } : null,
+              !isAuthenticated ? { name: "Login", url: "/login" } : null,
             ]
               .filter(Boolean)
               .map((item) => (
