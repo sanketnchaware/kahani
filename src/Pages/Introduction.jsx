@@ -106,13 +106,13 @@ const Introduction = () => {
                 ?.map(({ title, category, description, user, _id, index }) => {
                   return (
                     <div className="rounded-lg shadow-sameshadow hover:shadow-lg transition-shadow duration-300 bg-white">
-                      <div className="p-4 space-y-3">
+                      <div className="p-4 flex flex-col justify-between  h-full space-y-3">
                         {/* Story Title */}
                         <div className="flex justify-between items-center">
-                          <h3 className="body2b text-lg font-semibold text-gray-800">
+                          <h3 className=" body2b text-lg font-semibold text-gray-800">
                             {title}{" "}
                           </h3>
-                          <p className="text-xs">( {category?.name} )</p>
+                          <p className="text-xs flex-shrink-0">( {category?.name} )</p>
                         </div>
 
                         {/* Short Description */}

@@ -125,7 +125,12 @@ const Profile = () => {
         fetchUserStories();
         dispatch(fetchStories());
       })
-      .catch(console.error)
+      .catch((err) => {
+        showToastMessage(
+          err?.response?.data?.message || "Update failed",
+          "error"
+        );
+      })
       .finally(() => setLoading(false));
   };
 
@@ -135,6 +140,7 @@ const Profile = () => {
   };
 
   const handleStorySubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     const payload = { ...params, user: user?._id };
     const req = storyId
@@ -150,7 +156,15 @@ const Profile = () => {
         fetchUserStories();
         dispatch(fetchStories());
       })
-      .catch(console.error);
+      .catch((err) => {
+        showToastMessage(
+          err?.response?.data?.message || "Update failed",
+          "error"
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -171,9 +185,9 @@ const Profile = () => {
                 >
                   <div className="flex justify-between">
                     <p className="body3">{story.title}</p>
-                    <span className="caption px-3">
+                    <p className="flex-shrink-0 caption px-3">
                       ( {story.category?.name} )
-                    </span>
+                    </p>
                   </div>
                 </div>
               ))}

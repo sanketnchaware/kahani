@@ -338,7 +338,7 @@ const Home = () => {
                 </div>
                 <div className="space-y-4">
                   {React.Children.toArray(
-                    users?.map((item) => (
+                    users?.slice(0, 4)?.map((item) => (
                       <div
                         key={item?._id}
                         className="flex items-center justify-between p-2 rounded-xl hover:bg-gray-50 transition duration-200"
