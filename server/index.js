@@ -15,7 +15,6 @@ const app = express();
 const port = process.env.PORT || 3333;
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 const fronted_url = process.env.FRONTEND_URL;
-console.log("fronted_url:", fronted_url);
 // Middleware setup
 app.use(express.json());
 

@@ -59,7 +59,6 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-blue-50">
       <div className="bg-white rounded-lg shadow-md p-8 max-w-sm w-full">
-       
         <form className="mb-4 space-y-4" onSubmit={handleSubmit}>
           <h2 className="text-3xl font-bold text-center ">Sign in </h2>
           <TextInput
@@ -93,6 +92,11 @@ const Login = () => {
               )}
             </button>
           </div>
+          <div className="flex  justify-end">
+            <Link className="underline caption" to="/forgot-password">
+              Forgot Password?
+            </Link>
+          </div>
 
           <CommonButton type="submit" size="sm" styles="w-full  text-md">
             Sign In
@@ -109,7 +113,7 @@ const Login = () => {
         <div className="mt-6 text-center">
           <p className="text-gray-500">or</p>
 
-          <Link className="underline text-sm" to="/signup">
+          <Link className="underline caption" to="/signup">
             Create New Account
           </Link>
         </div>
