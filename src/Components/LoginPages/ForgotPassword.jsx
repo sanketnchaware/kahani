@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CommonButton from "../Common/CommonButton";
 import { Link } from "react-router-dom";
 import TextInput from "../Common/TextInput";
 import axiosInstance from "../../utils/axiosInstance";
 import { showToastMessage } from "../../utils/helpers";
+import LoaderContext from "../../Context/loaderContext";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+
+  const { setLoading } = useContext(LoaderContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setEmail("");
 
+    setLoading(true);
     try {
       const res = await axiosInstance.post("/auth/forgot-password", { email });
       showToastMessage(res.data.message, "success");
@@ -22,6 +26,8 @@ const ForgotPassword = () => {
         err.response?.data?.message || "Something went wrong. Try again.";
       setError(message);
       showToastMessage(message, "error");
+    } finally {
+      setLoading(false);
     }
   };
 

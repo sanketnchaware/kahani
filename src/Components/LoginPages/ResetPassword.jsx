@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import TextInput from "../Common/TextInput";
 import CommonButton from "../Common/CommonButton";
 import axiosInstance from "../../utils/axiosInstance";
 import { showToastMessage } from "../../utils/helpers";
+import LoaderContext from "../../Context/loaderContext";
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const navigate = useNavigate();
+  const { setLoading } = useContext(LoaderContext);
 
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
@@ -17,6 +19,7 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     if (password1 !== password2) {
       setError("Passwords do not match.");
@@ -39,6 +42,8 @@ const ResetPassword = () => {
       const msg = err.response?.data?.message || "Reset failed.";
       showToastMessage(msg, "error");
       setError(msg);
+    } finally {
+      setLoading(false);
     }
   };
 
