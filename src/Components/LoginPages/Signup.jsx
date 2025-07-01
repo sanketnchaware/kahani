@@ -45,7 +45,8 @@ const Signup = () => {
         navigate("/login");
       })
       .catch((error) => {
-        "error:", error;
+        const msg = error?.response?.data?.message || "Reset failed.";
+        showToastMessage(msg, "error");
       });
   };
 

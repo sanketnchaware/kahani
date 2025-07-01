@@ -18,16 +18,31 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Create
 router.post("/", async (req, res) => {
   try {
-    const savedUser = await User.create({
-      ...req.body,
-    });
+    const { email, phone } = req.body;
 
-    return res.status(200).send({
+    // Check for existing email
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).send({ message: "Email already exists." });
+    }
+
+    // Check for existing phone (if provided)
+    if (phone) {
+      const existingPhone = await User.findOne({ phone });
+      if (existingPhone) {
+        return res
+          .status(400)
+          .send({ message: "Phone number already exists." });
+      }
+    }
+
+    const savedUser = await User.create(req.body);
+
+    return res.status(201).send({
       data: savedUser,
-      message: "User created successfully !",
+      message: "User created successfully!",
     });
   } catch (err) {
     return res.status(500).send({ message: err.message });
