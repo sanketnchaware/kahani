@@ -22,8 +22,8 @@ const CreateStory = ({
 }) => {
   const [tag, setTag] = useState("");
   const { categories } = useSelector((state) => state.dropdown);
-  const dispatch = useDispatch();
-  const { loading, setLoading } = useContext(LoaderContext);
+
+  const { setLoading } = useContext(LoaderContext);
 
   const handleTagChange = (e) => {
     const input = e.target.value;
@@ -52,6 +52,7 @@ const CreateStory = ({
           title: res?.data?.story?.title,
           description: res?.data?.story?.description,
           tags: res?.data?.story?.tags,
+          content: res?.data?.story?.content,
           category: res?.data?.story?.category?._id,
         });
       })
@@ -75,7 +76,7 @@ const CreateStory = ({
       className={`fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm transition-all duration-300 ${
         open ? "opacity-100 z-50" : "opacity-0 -z-10"
       }`}
-      onClick={(e) => e.target === e.currentTarget && toggleOpen()}
+      // onClick={(e) => e.target === e.currentTarget && toggleOpen()}
     >
       {open && (
         <form
@@ -103,7 +104,7 @@ const CreateStory = ({
             </div>
 
             {/* Content */}
-            <div className="px-2 space-y-6 overflow-y-auto max-h-[calc(90vh-200px)] ">
+            <div className="px-2 mb-4  py-4 space-y-6 overflow-y-auto max-h-[calc(90vh-200px)] ">
               {/* Title Input */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
@@ -120,6 +121,21 @@ const CreateStory = ({
                   error={errors?.title}
                 />
               </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Description
+                </label>
+                <TextInput
+                  required={true}
+                  type="text"
+                  name="description"
+                  placeholder="Enter an engaging description for your story..."
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition duration-200"
+                  value={params?.description}
+                  onChange={handleChange}
+                  error={errors?.description}
+                />
+              </div>
 
               {/* Story Content */}
               <div className="space-y-2 ">
@@ -130,8 +146,8 @@ const CreateStory = ({
                   required
                   className="w-full text-black h-64 px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-black focus:border-transparent transition duration-200 resize-none"
                   placeholder="Write your interesting story and attract people towards you..."
-                  name="description"
-                  value={params?.description}
+                  name="content"
+                  value={params?.content}
                   onChange={handleChange}
                 />
               </div>
@@ -198,7 +214,7 @@ const CreateStory = ({
             </div>
 
             {/* Footer */}
-            <div className="flex justify-end items-center gap-4 mt-6 pt-4 border-t">
+            <div className="flex justify-end items-center gap-4  border-t">
               <button
                 onClick={() => {
                   setParams(fields);

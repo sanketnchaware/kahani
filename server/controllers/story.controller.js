@@ -31,6 +31,7 @@ router.post("/", async (req, res) => {
       category,
       description,
       tags,
+      content,
     });
 
     // Save the story to the database
@@ -111,11 +112,11 @@ router.delete("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const { title, description, tags, user, category } = req.body;
+    const { title, description, tags, user, category, content } = req.body;
 
     const updatedStory = await Story.findOneAndUpdate(
       { _id: req.params.id },
-      { title, description, user, category, tags },
+      { title, description, user, category, tags, content },
       { new: true }
     )
       .populate("user")

@@ -32,7 +32,13 @@ const Profile = () => {
   const [userStories, setUserStories] = useState([]);
   const [openCreateModal, setOpenCreateModal] = useState(false);
 
-  const defaultFields = { title: "", description: "", tags: [], category: "" };
+  const defaultFields = {
+    title: "",
+    description: "",
+    tags: [],
+    category: "",
+    content: "",
+  };
   const [params, setParams] = useState(defaultFields);
   const [errors, setErrors] = useState(defaultFields);
 
@@ -54,6 +60,7 @@ const Profile = () => {
         lastname: user?.lastname || "",
         email: user?.email || "",
         phone: user?.phone || "",
+        content: user?.content,
       });
     }
   }, [token, user?._id]);

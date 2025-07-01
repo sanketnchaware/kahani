@@ -44,7 +44,7 @@ const StoryDetails = () => {
             </h1>
 
             {/* Author and Date Info */}
-            <div className="flex justify-center items-center gap-6 text-amber-700">
+            <div className="flex mb-4 justify-center items-center gap-6 text-amber-700">
               <div className="flex items-center gap-2">
                 <User size={18} />
                 <span className="font-medium">
@@ -56,13 +56,21 @@ const StoryDetails = () => {
                 <span>{moment(story?.createdAt).format("DD-MM-YYYY")}</span>
               </div>
             </div>
+             <p className="text-amber-900 font-bold text-center">
+              {story?.description}
+            </p>
           </div>
 
           {/* Story Content */}
+         
+           
+        
+
+          {/* Story Content */}
           <div className="prose max-w-none">
-            <div className="font-serif text-lg leading-relaxed text-gray-800 whitespace-pre-line">
-              {story?.description}
-            </div>
+            <p className="font-serif text-lg leading-relaxed text-gray-800 whitespace-pre-line">
+              {story?.content}
+            </p>
           </div>
 
           {/* Decorative Footer */}

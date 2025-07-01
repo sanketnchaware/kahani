@@ -14,6 +14,10 @@ const storySchema = new Schema(
       ref: "Category",
       required: true,
     },
+    content: {
+      type: String,
+      required: true,
+    },
   },
 
   {
