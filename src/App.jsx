@@ -13,6 +13,7 @@ import AuthSuccess from "./Components/AuthSuccess";
 import NotFound from "./Pages/NotFound";
 import ForgotPassword from "./Components/LoginPages/ForgotPassword";
 import ResetPassword from "./Components/LoginPages/ResetPassword";
+import GSAP from "./Pages/GSAP";
 
 const App = () => {
   return (
@@ -30,10 +31,7 @@ const App = () => {
           <Route path="/stories/:id" element={<StoryDetails />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
-
-
-
-
+          <Route path="/gsap" element={<GSAP />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
